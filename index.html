@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#ffffff">
 
-<title>MJIS — Maa Janki Industrial Services | Coming Soon</title>
+<title>MJIS — Maa Janki Industrial Services</title>
 
 <style>
 /* =========================================================
-   MJIS — PREMIUM COMING SOON
-   Single HTML file
-   No external libraries
+   MJIS — MAA JANKI INDUSTRIAL SERVICES
+   PREMIUM 3D COMING SOON PAGE
+   Single-file HTML / CSS / JS
 ========================================================= */
 
 * {
@@ -22,13 +22,29 @@
 
 :root {
     --pink: #ff3f78;
-    --pink2: #ff7da5;
-    --pink3: #ffd6e2;
-    --dark: #151515;
+    --pink2: #ff719b;
+    --pink-soft: #fff1f5;
+    --red: #ff315f;
+
+    --black: #111111;
+    --dark: #292929;
     --gray: #777;
-    --light: #fff7fa;
-    --border: rgba(255, 63, 120, .12);
+    --light-gray: #eeeeee;
+
+    --white: #ffffff;
+
+    --shadow:
+        0 30px 80px rgba(0,0,0,.10),
+        0 10px 30px rgba(255,63,120,.08);
+
+    --soft-shadow:
+        10px 10px 30px rgba(0,0,0,.08),
+        -10px -10px 30px rgba(255,255,255,.9);
 }
+
+/* =========================================================
+   BODY
+========================================================= */
 
 html {
     scroll-behavior: smooth;
@@ -36,8 +52,8 @@ html {
 
 body {
     min-height: 100vh;
-    width: 100%;
     overflow-x: hidden;
+
     font-family:
         Inter,
         -apple-system,
@@ -46,402 +62,728 @@ body {
         Roboto,
         Arial,
         sans-serif;
-    color: var(--dark);
+
+    color: var(--black);
     background:
-        radial-gradient(circle at 10% 10%, #fff0f5 0%, transparent 28%),
-        radial-gradient(circle at 90% 80%, #fff1f6 0%, transparent 30%),
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255,63,120,.07),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(255,63,120,.06),
+            transparent 30%
+        ),
         #fff;
 }
 
 /* =========================================================
-   BACKGROUND
+   CUSTOM CURSOR
 ========================================================= */
 
-.background {
+.cursor-dot {
+    position: fixed;
+
+    width: 10px;
+    height: 10px;
+
+    background: var(--pink);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    transform:
+        translate(-50%, -50%);
+
+    box-shadow:
+        0 0 0 6px rgba(255,63,120,.08),
+        0 0 25px rgba(255,63,120,.5);
+
+    transition:
+        width .2s ease,
+        height .2s ease;
+}
+
+.cursor-ring {
+    position: fixed;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid rgba(255,63,120,.35);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 9998;
+
+    transform:
+        translate(-50%, -50%);
+
+    transition:
+        width .25s ease,
+        height .25s ease,
+        border-color .25s ease;
+}
+
+/* Hide custom cursor on touch devices */
+
+@media (hover: none) {
+    .cursor-dot,
+    .cursor-ring {
+        display: none;
+    }
+}
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+.background-grid {
     position: fixed;
     inset: 0;
-    overflow: hidden;
+
     pointer-events: none;
+
+    opacity: .35;
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 85%
+        );
+
     z-index: 0;
 }
 
+/* =========================================================
+   FLOATING GLOW
+========================================================= */
+
 .glow {
-    position: absolute;
+    position: fixed;
+
+    width: 300px;
+    height: 300px;
+
     border-radius: 50%;
-    filter: blur(60px);
-    opacity: .45;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,63,120,.11),
+            transparent 70%
+        );
+
+    filter: blur(8px);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    animation: glowMove 12s ease-in-out infinite alternate;
 }
 
-.glow-1 {
-    width: 360px;
-    height: 360px;
-    background: #ffd8e5;
-    left: -150px;
-    top: -100px;
-    animation: glowMove1 12s ease-in-out infinite alternate;
+.glow.one {
+    top: -120px;
+    left: -100px;
 }
 
-.glow-2 {
-    width: 420px;
-    height: 420px;
-    background: #ffe8ef;
-    right: -180px;
-    bottom: -120px;
-    animation: glowMove2 15s ease-in-out infinite alternate;
+.glow.two {
+    right: -120px;
+    bottom: -100px;
+
+    animation-delay: -5s;
 }
 
-.glow-3 {
-    width: 230px;
-    height: 230px;
-    background: #ffdce7;
-    right: 30%;
-    top: 5%;
-    opacity: .22;
-    animation: glowMove3 10s ease-in-out infinite alternate;
-}
+@keyframes glowMove {
 
-@keyframes glowMove1 {
-    to {
-        transform: translate(80px, 70px) scale(1.15);
+    0% {
+        transform: translate(0,0) scale(1);
     }
-}
 
-@keyframes glowMove2 {
-    to {
-        transform: translate(-80px, -60px) scale(1.12);
-    }
-}
-
-@keyframes glowMove3 {
-    to {
-        transform: translate(-50px, 70px) scale(1.3);
+    100% {
+        transform: translate(50px,30px) scale(1.25);
     }
 }
 
 /* =========================================================
-   PAGE
+   MAIN CONTAINER
 ========================================================= */
 
 .page {
+    position: relative;
+
+    z-index: 5;
+
+    width: min(1350px, 94%);
+
     min-height: 100vh;
-    width: min(1400px, 94%);
+
     margin: auto;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: clamp(30px, 6vw, 100px);
+    display: flex;
 
-    padding: 50px 20px 80px;
-    position: relative;
-    z-index: 2;
+    flex-direction: column;
 }
 
 /* =========================================================
-   LEFT SIDE
+   NAVBAR
 ========================================================= */
 
-.content {
-    animation: contentAppear 1.2s cubic-bezier(.2,.8,.2,1) both;
+.navbar {
+
+    width: 100%;
+
+    padding:
+        28px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
 }
 
-@keyframes contentAppear {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* BRAND */
+/* Brand */
 
 .brand {
-    display: inline-flex;
+    display: flex;
+
     align-items: center;
-    gap: 14px;
-    margin-bottom: 34px;
+
+    gap: 13px;
 }
 
-.brand-icon {
-    width: 58px;
-    height: 58px;
+.brand-logo {
+
+    width: 50px;
+    height: 50px;
 
     display: grid;
+
     place-items: center;
 
-    border-radius: 18px;
+    border-radius: 16px;
 
     background:
-        linear-gradient(145deg, #ffffff, #ffe4ed);
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #ffe8ef
+        );
 
     color: var(--pink);
 
     font-weight: 900;
-    font-size: 21px;
-
-    box-shadow:
-        12px 12px 25px rgba(255,63,120,.12),
-        -8px -8px 20px white,
-        inset 0 0 0 1px rgba(255,63,120,.08);
-
-    transform: rotate(-5deg);
-}
-
-.brand-name {
-    font-size: 19px;
-    font-weight: 900;
-    letter-spacing: 3px;
-}
-
-.brand-small {
-    margin-top: 4px;
-    font-size: 10px;
-    letter-spacing: 1.7px;
-    color: #999;
-}
-
-/* COMING SOON BADGE */
-
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    padding: 9px 16px;
-
-    border-radius: 100px;
-
-    background: rgba(255,63,120,.06);
-
-    color: var(--pink);
-
-    font-size: 11px;
-    font-weight: 800;
-
-    letter-spacing: 2px;
-
-    border: 1px solid rgba(255,63,120,.08);
-
-    margin-bottom: 20px;
-}
-
-.badge-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--pink);
-    box-shadow: 0 0 0 5px rgba(255,63,120,.08);
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    50% {
-        transform: scale(.65);
-        box-shadow: 0 0 0 9px rgba(255,63,120,.02);
-    }
-}
-
-/* HEADING */
-
-h1 {
-    font-size: clamp(54px, 7vw, 105px);
-    line-height: .9;
-    letter-spacing: -6px;
-    font-weight: 900;
-    margin-bottom: 28px;
-}
-
-h1 .line {
-    display: block;
-}
-
-h1 .pink {
-    color: var(--pink);
-    position: relative;
-}
-
-h1 .pink::after {
-    content: "";
-    position: absolute;
-    width: 55%;
-    height: 8px;
-    border-radius: 100px;
-    background: #ffd6e2;
-    left: 2px;
-    bottom: -3px;
-    z-index: -1;
-    transform: rotate(-2deg);
-}
-
-/* DESCRIPTION */
-
-.description {
-    max-width: 590px;
 
     font-size: 17px;
-    line-height: 1.85;
 
-    color: #707070;
-
-    margin-bottom: 30px;
-}
-
-/* LOVE LINE */
-
-.love-line {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-
-    color: #888;
-
-    font-size: 13px;
-    letter-spacing: .3px;
-
-    margin-bottom: 38px;
-}
-
-.love-heart {
-    width: 17px;
-    height: 17px;
-
-    position: relative;
-
-    background: var(--pink);
-
-    transform: rotate(-45deg);
-
-    animation: heartbeat 1.5s infinite;
-}
-
-.love-heart::before,
-.love-heart::after {
-    content: "";
-
-    position: absolute;
-
-    width: 17px;
-    height: 17px;
-
-    background: var(--pink);
-
-    border-radius: 50%;
-}
-
-.love-heart::before {
-    top: -8px;
-    left: 0;
-}
-
-.love-heart::after {
-    top: 0;
-    left: 8px;
-}
-
-@keyframes heartbeat {
-    0%,100% {
-        transform: rotate(-45deg) scale(1);
-    }
-
-    15% {
-        transform: rotate(-45deg) scale(1.2);
-    }
-
-    30% {
-        transform: rotate(-45deg) scale(1);
-    }
-
-    45% {
-        transform: rotate(-45deg) scale(1.12);
-    }
-}
-
-/* =========================================================
-   LIVE TIME CARD
-========================================================= */
-
-.time-card {
-    display: inline-flex;
-    align-items: center;
-    gap: 15px;
-
-    padding: 13px 18px;
-
-    border-radius: 18px;
-
-    background: rgba(255,255,255,.72);
-
-    border: 1px solid rgba(255,63,120,.1);
+    letter-spacing: -1px;
 
     box-shadow:
-        10px 15px 35px rgba(0,0,0,.05),
-        inset 0 1px 0 white;
+        8px 8px 20px rgba(0,0,0,.08),
+        -8px -8px 20px rgba(255,255,255,.95);
 
-    backdrop-filter: blur(15px);
+    transform:
+        rotate(-4deg);
 }
 
-.live-dot {
-    width: 9px;
-    height: 9px;
+.brand-text strong {
 
-    border-radius: 50%;
-
-    background: #27c46b;
-
-    box-shadow:
-        0 0 0 5px rgba(39,196,107,.08),
-        0 0 18px rgba(39,196,107,.4);
-}
-
-.time-info small {
     display: block;
+
+    font-size: 17px;
+
+    letter-spacing: 2px;
+}
+
+.brand-text span {
+
+    display: block;
+
+    margin-top: 3px;
 
     color: #999;
 
     font-size: 9px;
 
     letter-spacing: 1.5px;
-
-    margin-bottom: 3px;
 }
 
-#miniTime {
-    font-size: 16px;
-    font-weight: 800;
-    letter-spacing: 2px;
+/* Status */
+
+.status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        9px 15px;
+
+    border-radius: 50px;
+
+    background: rgba(255,255,255,.8);
+
+    border: 1px solid #f2f2f2;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.05);
+
+    font-size: 10px;
+
+    letter-spacing: 1.4px;
+
+    font-weight: 700;
+
+    color: #777;
+}
+
+.status-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--pink);
+
+    box-shadow:
+        0 0 0 5px rgba(255,63,120,.09);
+
+    animation:
+        statusPulse 1.5s infinite;
+}
+
+@keyframes statusPulse {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.35);
+    }
 }
 
 /* =========================================================
-   3D WATCH
+   HERO
 ========================================================= */
 
-.watch-zone {
-    display: flex;
+.hero {
+
+    flex: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(400px, .9fr);
+
     align-items: center;
-    justify-content: center;
 
-    perspective: 1400px;
+    gap: 70px;
 
-    min-height: 600px;
+    padding:
+        45px 0 80px;
 }
 
-.watch-float {
-    position: relative;
+/* =========================================================
+   HERO CONTENT
+========================================================= */
 
-    width: min(500px, 80vw);
-    aspect-ratio: 1;
-
-    transform-style: preserve-3d;
+.hero-content {
 
     animation:
-        watchFloat 6s ease-in-out infinite;
+        heroIn 1s cubic-bezier(.2,.8,.2,1)
+        forwards;
+}
+
+@keyframes heroIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+.eyebrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding:
+        9px 15px;
+
+    border-radius: 50px;
+
+    background:
+        var(--pink-soft);
+
+    color:
+        var(--pink);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 22px;
+}
+
+.eyebrow-heart {
+    font-size: 13px;
+
+    animation:
+        miniBeat 1.2s infinite;
+}
+
+@keyframes miniBeat {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1.25);
+    }
+
+    35% {
+        transform: scale(1);
+    }
+}
+
+h1 {
+
+    font-size:
+        clamp(
+            50px,
+            7vw,
+            100px
+        );
+
+    line-height: .92;
+
+    letter-spacing:
+        -6px;
+
+    max-width: 850px;
+
+    margin-bottom: 27px;
+}
+
+h1 .normal {
+    display: block;
+}
+
+h1 .pink {
+    display: block;
+
+    color: var(--pink);
+
+    position: relative;
+}
+
+h1 .pink::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 4px;
+
+    bottom: -5px;
+
+    width: 95px;
+
+    height: 5px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            transparent
+        );
+}
+
+/* Description */
+
+.description {
+
+    max-width: 610px;
+
+    color: #6d6d6d;
+
+    font-size:
+        clamp(14px,1.3vw,17px);
+
+    line-height: 1.8;
+
+    margin-bottom: 30px;
+}
+
+/* =========================================================
+   FEATURE PILLS
+========================================================= */
+
+.features {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 32px;
+}
+
+.feature {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        10px 13px;
+
+    border:
+        1px solid #eeeeee;
+
+    background:
+        rgba(255,255,255,.8);
+
+    border-radius: 12px;
+
+    font-size: 11px;
+
+    color: #555;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.035);
 
     transition:
-        transform .2s ease-out;
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.feature:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.08);
+}
+
+.feature b {
+
+    color: var(--pink);
+
+    font-size: 13px;
+}
+
+/* =========================================================
+   LOVE MESSAGE
+========================================================= */
+
+.love-message {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    color: #777;
+
+    font-size: 12px;
+
+    letter-spacing: .3px;
+}
+
+.love-heart {
+
+    width: 23px;
+    height: 23px;
+
+    position: relative;
+
+    background:
+        var(--pink);
+
+    transform:
+        rotate(-45deg);
+
+    border-radius:
+        4px 0 4px 0;
+
+    animation:
+        bigHeartBeat 1.4s infinite;
+
+    box-shadow:
+        0 8px 20px rgba(255,63,120,.3);
+}
+
+.love-heart::before,
+.love-heart::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 23px;
+    height: 23px;
+
+    border-radius: 50%;
+
+    background:
+        var(--pink);
+}
+
+.love-heart::before {
+    top: -11px;
+    left: 0;
+}
+
+.love-heart::after {
+    top: 0;
+    left: 11px;
+}
+
+@keyframes bigHeartBeat {
+
+    0%,100% {
+        transform:
+            rotate(-45deg)
+            scale(1);
+    }
+
+    15% {
+        transform:
+            rotate(-45deg)
+            scale(1.18);
+    }
+
+    30% {
+        transform:
+            rotate(-45deg)
+            scale(1);
+    }
+
+    45% {
+        transform:
+            rotate(-45deg)
+            scale(1.1);
+    }
+}
+
+/* =========================================================
+   CLOCK STAGE
+========================================================= */
+
+.clock-stage {
+
+    position: relative;
+
+    min-height: 560px;
+
+    display: grid;
+
+    place-items: center;
+
+    perspective:
+        1300px;
+
+    animation:
+        clockEnter 1.2s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+}
+
+@keyframes clockEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(.92);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* =========================================================
+   WATCH
+========================================================= */
+
+.watch {
+
+    position: relative;
+
+    width:
+        min(
+            450px,
+            82vw
+        );
+
+    aspect-ratio: 1;
+
+    transform-style:
+        preserve-3d;
+
+    animation:
+        watchFloat 6s
+        ease-in-out
+        infinite;
+
+    transition:
+        transform .15s ease-out;
 }
 
 @keyframes watchFloat {
@@ -450,222 +792,257 @@ h1 .pink::after {
         transform:
             translateY(0)
             rotateX(3deg)
-            rotateY(-5deg);
+            rotateY(-4deg);
     }
 
     50% {
         transform:
-            translateY(-17px)
+            translateY(-16px)
             rotateX(-3deg)
             rotateY(5deg);
     }
 }
 
-/* WATCH SHADOW */
+/* Watch shadow */
 
 .watch-shadow {
+
     position: absolute;
 
     width: 70%;
-    height: 14%;
+    height: 13%;
 
     left: 15%;
-    bottom: -2%;
+    bottom: -4%;
 
     border-radius: 50%;
 
-    background: rgba(255,63,120,.18);
+    background:
+        rgba(255,63,120,.14);
 
-    filter: blur(25px);
+    filter:
+        blur(20px);
 
-    transform: translateZ(-100px);
+    transform:
+        translateZ(-80px);
 }
 
-/* WATCH BODY */
+/* Outer bezel */
 
-.watch {
+.bezel {
+
     position: absolute;
-    inset: 3%;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #ececec
+        );
+
+    box-shadow:
+        30px 35px 60px rgba(0,0,0,.14),
+        -15px -15px 40px rgba(255,255,255,.95),
+        inset 0 0 0 1px #ddd;
+
+    transform:
+        translateZ(0);
+}
+
+/* Pink metallic rim */
+
+.rim {
+
+    position: absolute;
+
+    inset: 15px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffabc1,
+            #fff,
+            #ff6e97,
+            #fff
+        );
+
+    box-shadow:
+        inset 0 0 15px rgba(255,255,255,.8),
+        0 0 0 2px rgba(255,63,120,.1);
+}
+
+/* Watch face */
+
+.watch-face {
+
+    position: absolute;
+
+    inset: 29px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
-            circle at 30% 20%,
-            white 0%,
-            white 30%,
-            #fff5f8 65%,
-            #ffdce7 100%
+            circle at 35% 25%,
+            #ffffff,
+            #ffffff 35%,
+            #fff8fa 70%,
+            #ffeaf0
         );
 
-    border: 13px solid white;
-
     box-shadow:
-        30px 35px 70px rgba(0,0,0,.13),
-        -10px -10px 30px white,
-        inset 0 0 0 2px rgba(255,63,120,.08),
-        inset 0 -20px 50px rgba(255,63,120,.08);
+        inset 0 0 35px rgba(255,63,120,.08);
 
-    transform-style: preserve-3d;
+    overflow: hidden;
 }
 
-/* WATCH SIDE DEPTH */
+/* Face shine */
 
-.watch::before {
+.watch-face::before {
+
     content: "";
 
     position: absolute;
 
-    inset: -25px;
+    width: 70%;
 
-    border-radius: 50%;
+    height: 40%;
 
-    border: 20px solid rgba(255,63,120,.05);
+    top: -10%;
 
-    transform: translateZ(-20px);
-}
-
-.watch::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 16px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,63,120,.15);
-}
-
-/* CROWN */
-
-.crown {
-    position: absolute;
-
-    right: -25px;
-    top: 42%;
-
-    width: 27px;
-    height: 65px;
-
-    border-radius: 8px;
+    left: 10%;
 
     background:
-        linear-gradient(
-            90deg,
-            #ffd4e1,
-            #fff,
-            #ffb7ca
-        );
+        rgba(255,255,255,.8);
 
-    box-shadow:
-        5px 7px 14px rgba(0,0,0,.1);
+    filter:
+        blur(15px);
 
-    transform: translateZ(-5px);
+    transform:
+        rotate(-25deg);
 }
 
-/* CLOCK TICKS */
+/* =========================================================
+   WATCH TICKS
+========================================================= */
+
+.ticks {
+
+    position: absolute;
+
+    inset: 5%;
+
+    border-radius: 50%;
+}
 
 .tick {
+
     position: absolute;
 
-    width: 4px;
-    height: 13px;
+    width: 2px;
 
-    top: 3.7%;
+    height: 9px;
+
+    top: 0;
+
     left: 50%;
+
+    background: #aaa;
 
     transform-origin:
-        50% 46%;
+        50% 225px;
 
     border-radius: 10px;
-
-    background: #444;
-
-    z-index: 2;
 }
 
-.tick.small {
-    width: 2px;
-    height: 8px;
-    background: #aaa;
+.tick.major {
+
+    width: 3px;
+
+    height: 15px;
+
+    background: #333;
 }
 
-/* Tick rotations */
+/* =========================================================
+   CLOCK NUMBERS
+========================================================= */
 
-.t1  { transform: translateX(-50%) rotate(0deg); }
-.t2  { transform: translateX(-50%) rotate(30deg); }
-.t3  { transform: translateX(-50%) rotate(60deg); }
-.t4  { transform: translateX(-50%) rotate(90deg); }
-.t5  { transform: translateX(-50%) rotate(120deg); }
-.t6  { transform: translateX(-50%) rotate(150deg); }
-.t7  { transform: translateX(-50%) rotate(180deg); }
-.t8  { transform: translateX(-50%) rotate(210deg); }
-.t9  { transform: translateX(-50%) rotate(240deg); }
-.t10 { transform: translateX(-50%) rotate(270deg); }
-.t11 { transform: translateX(-50%) rotate(300deg); }
-.t12 { transform: translateX(-50%) rotate(330deg); }
+.clock-number {
 
-/* NUMBERS */
-
-.number {
     position: absolute;
 
-    transform: translate(-50%,-50%);
+    font-weight: 800;
 
-    font-weight: 900;
+    color: #333;
 
-    color: #292929;
+    font-size: 22px;
 
-    z-index: 3;
+    transform:
+        translate(-50%,-50%);
 }
 
-.n12 {
-    left: 50%;
+.clock-number.n12 {
     top: 11%;
-}
-
-.n3 {
-    left: 89%;
-    top: 50%;
-}
-
-.n6 {
     left: 50%;
-    top: 89%;
 }
 
-.n9 {
-    left: 11%;
+.clock-number.n3 {
     top: 50%;
+    left: 89%;
 }
 
-/* HANDS */
+.clock-number.n6 {
+    top: 89%;
+    left: 50%;
+}
+
+.clock-number.n9 {
+    top: 50%;
+    left: 11%;
+}
+
+/* =========================================================
+   WATCH HANDS
+========================================================= */
 
 .hand {
+
     position: absolute;
 
     left: 50%;
+
     bottom: 50%;
 
-    transform-origin: 50% 100%;
+    transform-origin:
+        50% 100%;
 
     border-radius: 20px;
 
-    z-index: 7;
+    z-index: 20;
 }
 
-.hour {
-    width: 10px;
-    height: 23%;
+.hour-hand {
 
-    margin-left: -5px;
+    width: 9px;
 
-    background: #222;
+    height: 24%;
+
+    margin-left: -4.5px;
+
+    background: #171717;
 }
 
-.minute {
+.minute-hand {
+
     width: 6px;
+
     height: 34%;
 
     margin-left: -3px;
@@ -673,8 +1050,10 @@ h1 .pink::after {
     background: var(--pink);
 }
 
-.second {
+.second-hand {
+
     width: 2px;
+
     height: 39%;
 
     margin-left: -1px;
@@ -682,268 +1061,350 @@ h1 .pink::after {
     background: #222;
 }
 
-/* CENTER */
+/* Center */
 
 .center {
-    position: absolute;
 
-    left: 50%;
-    top: 50%;
+    position: absolute;
 
     width: 19px;
     height: 19px;
 
-    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
 
-    background: var(--pink);
-
-    border: 4px solid white;
+    transform:
+        translate(-50%,-50%);
 
     border-radius: 50%;
 
-    z-index: 10;
+    background:
+        var(--pink);
+
+    border:
+        4px solid white;
+
+    z-index: 30;
 
     box-shadow:
-        0 3px 14px rgba(255,63,120,.4);
-}
-
-/* DIGITAL TIME INSIDE WATCH */
-
-.digital-time {
-    position: absolute;
-
-    left: 50%;
-    top: 67%;
-
-    transform: translate(-50%,-50%);
-
-    padding: 8px 15px;
-
-    border-radius: 10px;
-
-    background: rgba(255,255,255,.72);
-
-    border: 1px solid rgba(255,63,120,.08);
-
-    color: var(--pink);
-
-    font-weight: 900;
-
-    font-size: clamp(14px,2.4vw,22px);
-
-    letter-spacing: 3px;
-
-    white-space: nowrap;
-
-    box-shadow:
-        0 8px 20px rgba(255,63,120,.08);
-
-    z-index: 6;
-}
-
-/* DATE */
-
-.date-display {
-    position: absolute;
-
-    left: 50%;
-    top: 59%;
-
-    transform: translate(-50%,-50%);
-
-    color: #999;
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-    z-index: 6;
+        0 4px 15px rgba(255,63,120,.4);
 }
 
 /* =========================================================
-   CURSOR HEART EFFECT
+   DIGITAL CLOCK
 ========================================================= */
 
-.cursor-heart {
+.digital-clock {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 67%;
+
+    transform:
+        translate(-50%,-50%);
+
+    padding:
+        9px 15px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,.82);
+
+    border:
+        1px solid rgba(255,63,120,.08);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.05);
+
+    color:
+        var(--pink);
+
+    font-size:
+        clamp(14px,2vw,20px);
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    z-index: 25;
+
+    white-space: nowrap;
+}
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.date-display {
+
+    position: absolute;
+
+    top: 57%;
+
+    left: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    font-size: 9px;
+
+    letter-spacing: 1.7px;
+
+    color: #aaa;
+
+    z-index: 25;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+/* =========================================================
+   3D HEART THAT FOLLOWS POINTER
+========================================================= */
+
+.pointer-heart {
+
     position: fixed;
 
     left: 0;
+
     top: 0;
 
-    width: 13px;
-    height: 13px;
+    width: 34px;
 
-    background: var(--pink);
-
-    transform:
-        translate(-50%,-50%)
-        rotate(-45deg)
-        scale(0);
+    height: 34px;
 
     pointer-events: none;
 
-    z-index: 9999;
+    z-index: 9997;
 
-    opacity: .9;
+    opacity: 0;
 
-    animation: cursorHeart .9s ease-out forwards;
+    transform:
+        translate(-50%,-50%)
+        rotate(-45deg);
+
+    transition:
+        opacity .3s ease;
 }
 
-.cursor-heart::before,
-.cursor-heart::after {
+.pointer-heart.show {
+    opacity: 1;
+}
+
+.pointer-heart .heart-body {
+
+    position: absolute;
+
+    width: 28px;
+    height: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff89aa,
+            #ff2f65
+        );
+
+    border-radius:
+        5px 0 5px 0;
+
+    box-shadow:
+        5px 8px 15px rgba(255,63,120,.35);
+
+    transform:
+        translateZ(10px);
+}
+
+.pointer-heart .heart-body::before,
+.pointer-heart .heart-body::after {
+
     content: "";
 
     position: absolute;
 
-    width: 13px;
-    height: 13px;
-
-    background: var(--pink);
+    width: 28px;
+    height: 28px;
 
     border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ff9db8,
+            #ff2f65
+        );
 }
 
-.cursor-heart::before {
-    top: -6px;
+.pointer-heart .heart-body::before {
+    top: -14px;
     left: 0;
 }
 
-.cursor-heart::after {
+.pointer-heart .heart-body::after {
     top: 0;
-    left: 6px;
+    left: 14px;
 }
 
-@keyframes cursorHeart {
+.pointer-heart::after {
+
+    content:
+        "♥";
+
+    position: absolute;
+
+    color:
+        rgba(255,255,255,.5);
+
+    font-size:
+        11px;
+
+    transform:
+        rotate(45deg)
+        translate(4px,-5px);
+
+    z-index: 5;
+}
+
+/* =========================================================
+   HEART TRAIL
+========================================================= */
+
+.trail-heart {
+
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 9996;
+
+    color:
+        var(--pink);
+
+    font-size:
+        12px;
+
+    animation:
+        trail .9s ease-out
+        forwards;
+}
+
+@keyframes trail {
 
     0% {
-        opacity: 1;
+        opacity: .8;
+
         transform:
             translate(-50%,-50%)
-            rotate(-45deg)
-            scale(.2);
-    }
-
-    35% {
-        opacity: 1;
-        transform:
-            translate(-50%,-75%)
-            rotate(-45deg)
-            scale(1);
+            scale(.5)
+            rotate(0);
     }
 
     100% {
         opacity: 0;
+
         transform:
             translate(
-                calc(-50% + var(--drift)),
-                calc(-50% - 55px)
+                -50%,
+                calc(-50% - 35px)
             )
-            rotate(-45deg)
-            scale(.45);
+            scale(1.3)
+            rotate(20deg);
     }
 }
 
 /* =========================================================
-   MOBILE TOUCH HEART
+   INDUSTRIAL DETAILS
 ========================================================= */
 
-.touch-heart {
-    position: fixed;
+.tech-ring {
+
+    position: absolute;
+
+    width: 490px;
+    height: 490px;
+
+    border:
+        1px dashed rgba(255,63,120,.16);
+
+    border-radius: 50%;
+
+    animation:
+        ringRotate 25s
+        linear infinite;
 
     pointer-events: none;
-
-    z-index: 9999;
-
-    color: var(--pink);
-
-    font-size: 24px;
-
-    animation: touchHeart 1s ease-out forwards;
 }
 
-@keyframes touchHeart {
+.tech-ring::before {
 
-    0% {
-        opacity: 0;
-        transform: translate(-50%,-50%) scale(.4);
-    }
+    content: "";
 
-    25% {
-        opacity: 1;
-        transform: translate(-50%,-70%) scale(1);
-    }
+    position: absolute;
 
-    100% {
-        opacity: 0;
-        transform: translate(-50%,-170%) scale(.65);
-    }
+    width: 10px;
+    height: 10px;
+
+    top: 8%;
+
+    left: 20%;
+
+    background:
+        var(--pink);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 15px rgba(255,63,120,.4);
 }
 
-/* =========================================================
-   FLOATING BACKGROUND HEARTS
-========================================================= */
+@keyframes ringRotate {
 
-.bg-heart {
-    position: fixed;
-
-    bottom: -30px;
-
-    color: #ffc7d7;
-
-    pointer-events: none;
-
-    z-index: 1;
-
-    opacity: 0;
-
-    animation: floatHeart 9s linear infinite;
-}
-
-.bg-heart:nth-child(1) {
-    left: 8%;
-    animation-delay: 0s;
-}
-
-.bg-heart:nth-child(2) {
-    left: 24%;
-    animation-delay: 2.5s;
-}
-
-.bg-heart:nth-child(3) {
-    left: 70%;
-    animation-delay: 4s;
-}
-
-.bg-heart:nth-child(4) {
-    left: 88%;
-    animation-delay: 1.5s;
-}
-
-@keyframes floatHeart {
-
-    0% {
-        opacity: 0;
+    from {
         transform:
-            translateY(0)
-            scale(.4)
             rotate(0deg);
     }
 
-    15% {
-        opacity: .65;
-    }
-
-    80% {
-        opacity: .35;
-    }
-
-    100% {
-        opacity: 0;
+    to {
         transform:
-            translateY(-110vh)
-            scale(1.3)
-            rotate(35deg);
+            rotate(360deg);
     }
+}
+
+.tech-label {
+
+    position: absolute;
+
+    right: -15px;
+
+    top: 30%;
+
+    padding:
+        7px 10px;
+
+    border-radius: 8px;
+
+    background:
+        white;
+
+    border:
+        1px solid #eee;
+
+    color: #999;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.05);
+
+    transform:
+        rotate(90deg);
 }
 
 /* =========================================================
@@ -951,47 +1412,63 @@ h1 .pink::after {
 ========================================================= */
 
 .footer {
-    position: fixed;
 
-    bottom: 18px;
-    left: 50%;
+    width: 100%;
 
-    transform: translateX(-50%);
+    padding:
+        20px 0 28px;
 
-    z-index: 5;
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
 
     color: #aaa;
 
     font-size: 10px;
 
-    letter-spacing: 1.4px;
+    letter-spacing: 1px;
 
-    white-space: nowrap;
+    border-top:
+        1px solid rgba(0,0,0,.04);
 }
 
-.footer b {
+.footer strong {
     color: var(--pink);
 }
 
+.footer-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
 /* =========================================================
-   TABLET
+   MOBILE
 ========================================================= */
 
 @media (max-width: 1000px) {
 
-    .page {
+    .hero {
+
         grid-template-columns: 1fr;
 
         text-align: center;
 
-        gap: 15px;
+        gap: 20px;
 
-        padding-top: 45px;
+        padding-top: 25px;
     }
 
-    .content {
+    .hero-content {
+
         display: flex;
+
         flex-direction: column;
+
         align-items: center;
     }
 
@@ -1000,188 +1477,139 @@ h1 .pink::after {
         margin-right: auto;
     }
 
-    .watch-zone {
+    .features {
+        justify-content: center;
+    }
+
+    .love-message {
+        justify-content: center;
+    }
+
+    .clock-stage {
         min-height: 500px;
     }
 
-    .watch-float {
-        width: min(440px, 75vw);
+    .tech-ring {
+        width: 410px;
+        height: 410px;
     }
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
+/* Tablet */
 
-@media (max-width: 600px) {
-
-    body {
-        min-height: 100svh;
-    }
+@media (max-width: 650px) {
 
     .page {
-        width: 92%;
-
-        padding:
-            30px 0
-            70px;
-
-        gap: 5px;
+        width: 91%;
     }
 
-    .brand {
-        margin-bottom: 22px;
+    .navbar {
+        padding-top: 18px;
     }
 
-    .brand-icon {
-        width: 49px;
-        height: 49px;
-        border-radius: 15px;
-        font-size: 17px;
+    .brand-logo {
+        width: 43px;
+        height: 43px;
+        border-radius: 13px;
     }
 
-    .brand-name {
-        font-size: 16px;
+    .brand-text strong {
+        font-size: 14px;
     }
 
-    .brand-small {
+    .brand-text span {
+        font-size: 7px;
+    }
+
+    .status {
+        padding: 8px 11px;
         font-size: 8px;
     }
 
-    .badge {
-        font-size: 9px;
-        padding: 8px 13px;
+    .hero {
+        padding-top: 35px;
+        padding-bottom: 50px;
     }
 
     h1 {
-        font-size: clamp(48px, 15vw, 70px);
+        font-size:
+            clamp(48px,14vw,72px);
 
-        letter-spacing: -4px;
-
-        margin-bottom: 20px;
-    }
-
-    h1 .pink::after {
-        height: 5px;
+        letter-spacing:
+            -4px;
     }
 
     .description {
-        width: 95%;
-
         font-size: 14px;
-
         line-height: 1.7;
-
-        margin-bottom: 22px;
     }
 
-    .love-line {
-        font-size: 11px;
-        margin-bottom: 24px;
-    }
-
-    .time-card {
-        padding: 10px 14px;
-        border-radius: 15px;
-    }
-
-    #miniTime {
-        font-size: 13px;
-    }
-
-    .watch-zone {
-        min-height: 390px;
-        margin-top: 0;
-    }
-
-    .watch-float {
-        width: min(320px, 76vw);
+    .clock-stage {
+        min-height: 420px;
     }
 
     .watch {
-        border-width: 9px;
+        width: min(360px,82vw);
     }
 
-    .watch::after {
-        inset: 10px;
+    .tech-ring {
+        width: 380px;
+        height: 380px;
     }
 
-    .number {
-        font-size: 15px;
-    }
-
-    .tick {
-        width: 3px;
-        height: 9px;
-    }
-
-    .tick.small {
-        height: 6px;
-    }
-
-    .hour {
-        width: 7px;
-        margin-left: -3.5px;
-    }
-
-    .minute {
-        width: 4px;
-        margin-left: -2px;
-    }
-
-    .digital-time {
-        font-size: 12px;
-        letter-spacing: 2px;
-        padding: 6px 9px;
-    }
-
-    .date-display {
-        font-size: 7px;
-        letter-spacing: 1px;
-    }
-
-    .crown {
-        width: 18px;
-        height: 42px;
-        right: -16px;
+    .tech-label {
+        display: none;
     }
 
     .footer {
-        bottom: 9px;
-        font-size: 8px;
-        letter-spacing: 1px;
+        flex-direction: column;
+        gap: 10px;
+
+        text-align: center;
     }
 }
 
-/* =========================================================
-   VERY SMALL PHONES
-========================================================= */
+/* Small phones */
 
-@media (max-width: 370px) {
+@media (max-width: 400px) {
 
-    .page {
-        padding-top: 22px;
+    .status {
+        display: none;
     }
 
     h1 {
-        font-size: 45px;
+        font-size: 48px;
     }
 
-    .watch-zone {
-        min-height: 330px;
+    .clock-stage {
+        min-height: 360px;
     }
 
-    .watch-float {
-        width: 270px;
+    .watch {
+        width: 290px;
     }
 
-    .description {
-        font-size: 13px;
+    .tech-ring {
+        width: 310px;
+        height: 310px;
+    }
+
+    .clock-number {
+        font-size: 17px;
+    }
+
+    .digital-clock {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .feature {
+        font-size: 10px;
     }
 }
 
 /* =========================================================
-   ACCESSIBILITY
+   REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1189,14 +1617,18 @@ h1 .pink::after {
     *,
     *::before,
     *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition: none !important;
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
     }
 }
 </style>
 </head>
-
 
 <body>
 
@@ -1204,539 +1636,558 @@ h1 .pink::after {
      BACKGROUND
 ======================================================= -->
 
-<div class="background">
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
-    <div class="glow glow-3"></div>
-</div>
+<div class="background-grid"></div>
 
-<!-- Floating hearts -->
-
-<div class="bg-heart">♥</div>
-<div class="bg-heart">♥</div>
-<div class="bg-heart">♥</div>
-<div class="bg-heart">♥</div>
+<div class="glow one"></div>
+<div class="glow two"></div>
 
 
 <!-- =======================================================
-     MAIN PAGE
+     CUSTOM POINTER
 ======================================================= -->
 
-<main class="page">
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
 
-    <!-- ===================================================
-         LEFT
-    ==================================================== -->
+<div class="pointer-heart" id="pointerHeart">
+    <div class="heart-body"></div>
+</div>
 
-    <section class="content">
+
+<!-- =======================================================
+     PAGE
+======================================================= -->
+
+<div class="page">
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
 
         <div class="brand">
 
-            <div class="brand-icon">
+            <div class="brand-logo">
                 MJ
             </div>
 
-            <div>
-                <div class="brand-name">
-                    MJIS
-                </div>
+            <div class="brand-text">
 
-                <div class="brand-small">
+                <strong>MJIS</strong>
+
+                <span>
                     MAA JANKI INDUSTRIAL SERVICES
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="badge">
-            <span class="badge-dot"></span>
-            SOMETHING BEAUTIFUL IS COMING
-        </div>
-
-
-        <h1>
-
-            <span class="line">
-                Coming
-            </span>
-
-            <span class="line pink">
-                Soon.
-            </span>
-
-        </h1>
-
-
-        <p class="description">
-            We are creating a new digital experience for
-            <strong>Maa Janki Industrial Services</strong>.
-            Simple, precise, modern — and made with a little
-            extra love.
-        </p>
-
-
-        <div class="love-line">
-
-            <div class="love-heart"></div>
-
-            <span>
-                Every great thing takes the right moment.
-            </span>
-
-        </div>
-
-
-        <!-- LIVE TIME -->
-
-        <div class="time-card">
-
-            <div class="live-dot"></div>
-
-            <div class="time-info">
-
-                <small>
-                    LIVE LOCAL TIME
-                </small>
-
-                <div id="miniTime">
-                    00:00:00
-                </div>
+                </span>
 
             </div>
 
         </div>
 
-    </section>
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            WEBSITE IN DEVELOPMENT
+
+        </div>
+
+    </header>
 
 
     <!-- ===================================================
-         WATCH
-    ==================================================== -->
+         HERO
+    =================================================== -->
 
-    <section class="watch-zone">
+    <main class="hero">
 
-        <div
-            class="watch-float"
-            id="watchFloat"
-        >
 
-            <div class="watch-shadow"></div>
+        <!-- LEFT -->
+
+        <section class="hero-content">
+
+            <div class="eyebrow">
+
+                <span class="eyebrow-heart">
+                    ♥
+                </span>
+
+                SOMETHING SPECIAL IS COMING
+
+            </div>
+
+
+            <h1>
+
+                <span class="normal">
+                    Built with
+                </span>
+
+                <span class="pink">
+                    Precision.
+                </span>
+
+            </h1>
+
+
+            <p class="description">
+
+                Maa Janki Industrial Services is creating a
+                new digital experience — bringing together
+                industrial strength, precision engineering,
+                reliability and a little human warmth.
+
+                <br><br>
+
+                Our new website is currently being crafted.
+                Stay connected. Something beautiful is
+                taking shape.
+
+            </p>
+
+
+            <!-- FEATURES -->
+
+            <div class="features">
+
+                <div class="feature">
+                    <b>✦</b>
+                    Industrial Services
+                </div>
+
+                <div class="feature">
+                    <b>◆</b>
+                    Precision Work
+                </div>
+
+                <div class="feature">
+                    <b>♥</b>
+                    Built With Care
+                </div>
+
+            </div>
+
+
+            <!-- LOVE -->
+
+            <div class="love-message">
+
+                <div class="love-heart"></div>
+
+                <span>
+                    Made with precision,
+                    powered by people,
+                    built with love.
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RIGHT — WATCH
+        ================================================= -->
+
+        <section class="clock-stage">
+
+            <div class="tech-ring"></div>
+
+            <div class="tech-label">
+                MJIS • ESTABLISHED
+            </div>
 
 
             <div class="watch">
 
-                <div class="crown"></div>
+                <div class="watch-shadow"></div>
 
 
-                <!-- WATCH TICKS -->
+                <!-- Outer -->
 
-                <div class="tick t1"></div>
-                <div class="tick t2"></div>
-                <div class="tick t3"></div>
-                <div class="tick t4"></div>
-                <div class="tick t5"></div>
-                <div class="tick t6"></div>
-                <div class="tick t7"></div>
-                <div class="tick t8"></div>
-                <div class="tick t9"></div>
-                <div class="tick t10"></div>
-                <div class="tick t11"></div>
-                <div class="tick t12"></div>
+                <div class="bezel"></div>
+
+                <div class="rim"></div>
 
 
-                <!-- NUMBERS -->
+                <!-- Face -->
 
-                <div class="number n12">
-                    12
-                </div>
-
-                <div class="number n3">
-                    3
-                </div>
-
-                <div class="number n6">
-                    6
-                </div>
-
-                <div class="number n9">
-                    9
-                </div>
+                <div class="watch-face">
 
 
-                <!-- DATE -->
+                    <!-- Ticks -->
 
-                <div
-                    class="date-display"
-                    id="dateDisplay"
-                >
-                    TODAY
-                </div>
+                    <div class="ticks">
+
+                        <div class="tick major"
+                             style="transform:translateX(-50%) rotate(0deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick"
+                             style="transform:translateX(-50%) rotate(30deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick major"
+                             style="transform:translateX(-50%) rotate(60deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick"
+                             style="transform:translateX(-50%) rotate(90deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick major"
+                             style="transform:translateX(-50%) rotate(120deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick"
+                             style="transform:translateX(-50%) rotate(150deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick major"
+                             style="transform:translateX(-50%) rotate(180deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick"
+                             style="transform:translateX(-50%) rotate(210deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick major"
+                             style="transform:translateX(-50%) rotate(240deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick"
+                             style="transform:translateX(-50%) rotate(270deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick major"
+                             style="transform:translateX(-50%) rotate(300deg); transform-origin:50% 225px;"></div>
+
+                        <div class="tick"
+                             style="transform:translateX(-50%) rotate(330deg); transform-origin:50% 225px;"></div>
+
+                    </div>
 
 
-                <!-- HANDS -->
+                    <!-- Numbers -->
 
-                <div
-                    class="hand hour"
-                    id="hourHand"
-                ></div>
+                    <div class="clock-number n12">
+                        12
+                    </div>
 
-                <div
-                    class="hand minute"
-                    id="minuteHand"
-                ></div>
+                    <div class="clock-number n3">
+                        3
+                    </div>
 
-                <div
-                    class="hand second"
-                    id="secondHand"
-                ></div>
+                    <div class="clock-number n6">
+                        6
+                    </div>
 
-
-                <!-- CENTER -->
-
-                <div class="center"></div>
+                    <div class="clock-number n9">
+                        9
+                    </div>
 
 
-                <!-- DIGITAL TIME -->
+                    <!-- Date -->
 
-                <div
-                    class="digital-time"
-                    id="digitalTime"
-                >
-                    00:00:00
+                    <div class="date-display"
+                         id="dateDisplay">
+                        LOADING DATE
+                    </div>
+
+
+                    <!-- Hands -->
+
+                    <div class="hand hour-hand"
+                         id="hourHand">
+                    </div>
+
+                    <div class="hand minute-hand"
+                         id="minuteHand">
+                    </div>
+
+                    <div class="hand second-hand"
+                         id="secondHand">
+                    </div>
+
+
+                    <div class="center"></div>
+
+
+                    <!-- Digital -->
+
+                    <div class="digital-clock"
+                         id="digitalClock">
+                        00:00:00
+                    </div>
+
                 </div>
 
             </div>
 
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div>
+            © <span id="year"></span>
+            <strong>MJIS</strong>
+            · Maa Janki Industrial Services
         </div>
 
-    </section>
+        <div class="footer-right">
+            Crafted with <strong>♥</strong>
+            · Coming Soon
+        </div>
 
-</main>
+    </footer>
 
-
-<!-- FOOTER -->
-
-<div class="footer">
-    © <span id="year"></span>
-    <b>MJIS</b>
-    · Maa Janki Industrial Services
 </div>
 
 
-<script>
 
+<script>
 /* =========================================================
-   MJIS LIVE CLOCK
+   MJIS — LIVE CLOCK
 ========================================================= */
+
+const hourHand =
+    document.getElementById("hourHand");
+
+const minuteHand =
+    document.getElementById("minuteHand");
+
+const secondHand =
+    document.getElementById("secondHand");
+
+const digitalClock =
+    document.getElementById("digitalClock");
+
+const dateDisplay =
+    document.getElementById("dateDisplay");
+
+const year =
+    document.getElementById("year");
+
 
 function updateClock() {
 
     const now = new Date();
 
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
+    const hours =
+        now.getHours();
+
+    const minutes =
+        now.getMinutes();
+
+    const seconds =
+        now.getSeconds();
 
     /*
-       Smooth analog clock angles
+        Smooth analog angles
     */
 
     const hourAngle =
-        ((hours % 12) * 30) +
-        (minutes * 0.5) +
-        (seconds / 120);
+        ((hours % 12) * 30)
+        +
+        (minutes * .5);
 
     const minuteAngle =
-        (minutes * 6) +
-        (seconds * 0.1);
+        (minutes * 6)
+        +
+        (seconds * .1);
 
     const secondAngle =
         seconds * 6;
 
 
-    document.getElementById("hourHand")
-        .style.transform =
+    hourHand.style.transform =
         `rotate(${hourAngle}deg)`;
 
-
-    document.getElementById("minuteHand")
-        .style.transform =
+    minuteHand.style.transform =
         `rotate(${minuteAngle}deg)`;
 
-
-    document.getElementById("secondHand")
-        .style.transform =
+    secondHand.style.transform =
         `rotate(${secondAngle}deg)`;
 
 
     /*
-       Digital clock
+        Digital clock
     */
 
     const hh =
-        String(hours).padStart(2, "0");
+        String(hours)
+        .padStart(2,"0");
 
     const mm =
-        String(minutes).padStart(2, "0");
+        String(minutes)
+        .padStart(2,"0");
 
     const ss =
-        String(seconds).padStart(2, "0");
+        String(seconds)
+        .padStart(2,"0");
 
 
-    const currentTime =
+    digitalClock.textContent =
         `${hh}:${mm}:${ss}`;
 
 
-    document.getElementById("digitalTime")
-        .textContent = currentTime;
-
-
-    document.getElementById("miniTime")
-        .textContent = currentTime;
-
-
     /*
-       Date
+        Date
     */
 
-    const dateText =
+    dateDisplay.textContent =
         now.toLocaleDateString(
             undefined,
             {
+                weekday: "short",
                 day: "2-digit",
-                month: "short"
+                month: "short",
+                year: "numeric"
             }
         ).toUpperCase();
 
 
-    document.getElementById("dateDisplay")
-        .textContent = dateText;
+    /*
+        Footer year
+    */
+
+    year.textContent =
+        now.getFullYear();
 }
 
-
-/*
-   Start clock immediately
-*/
 
 updateClock();
 
-
-/*
-   Keep it live
-*/
-
-setInterval(updateClock, 1000);
-
-
-/*
-   Current year
-*/
-
-document.getElementById("year")
-    .textContent =
-    new Date().getFullYear();
-
-
-/* =========================================================
-   DESKTOP — CURSOR HEART TRAIL
-========================================================= */
-
-let lastHeartTime = 0;
-
-document.addEventListener(
-    "pointermove",
-    function(event) {
-
-        /*
-           Only create hearts occasionally.
-           This keeps performance smooth.
-        */
-
-        const now = Date.now();
-
-        if (now - lastHeartTime < 90) {
-            return;
-        }
-
-        lastHeartTime = now;
-
-
-        const heart =
-            document.createElement("div");
-
-        heart.className =
-            "cursor-heart";
-
-
-        heart.style.left =
-            event.clientX + "px";
-
-        heart.style.top =
-            event.clientY + "px";
-
-
-        /*
-           Random sideways movement
-        */
-
-        const drift =
-            (Math.random() * 40 - 20) + "px";
-
-        heart.style.setProperty(
-            "--drift",
-            drift
-        );
-
-
-        document.body.appendChild(heart);
-
-
-        setTimeout(
-            () => heart.remove(),
-            1000
-        );
-    }
+setInterval(
+    updateClock,
+    1000
 );
 
 
-/* =========================================================
-   MOBILE — TOUCH HEARTS
-========================================================= */
-
-document.addEventListener(
-    "touchstart",
-    function(event) {
-
-        const touch =
-            event.touches[0];
-
-        if (!touch) return;
-
-
-        const heart =
-            document.createElement("div");
-
-        heart.className =
-            "touch-heart";
-
-        heart.textContent = "♥";
-
-
-        heart.style.left =
-            touch.clientX + "px";
-
-        heart.style.top =
-            touch.clientY + "px";
-
-
-        document.body.appendChild(heart);
-
-
-        setTimeout(
-            () => heart.remove(),
-            1100
-        );
-    },
-    {
-        passive: true
-    }
-);
-
 
 /* =========================================================
-   3D WATCH — MOUSE PARALLAX
+   DESKTOP POINTER + 3D HEART
 ========================================================= */
 
-const watch =
-    document.getElementById("watchFloat");
+const cursorDot =
+    document.querySelector(".cursor-dot");
+
+const cursorRing =
+    document.querySelector(".cursor-ring");
+
+const pointerHeart =
+    document.getElementById("pointerHeart");
 
 
-const isTouchDevice =
-    window.matchMedia(
-        "(pointer: coarse)"
-    ).matches;
+let mouseX = 0;
+let mouseY = 0;
+
+let ringX = 0;
+let ringY = 0;
+
+let heartX = 0;
+let heartY = 0;
+
+let lastTrail = 0;
 
 
-if (!isTouchDevice) {
+function animatePointer() {
 
-    document.addEventListener(
-        "mousemove",
-        function(event) {
+    /*
+        Ring smoothing
+    */
 
-            const x =
-                (event.clientX /
-                window.innerWidth -
-                0.5);
+    ringX +=
+        (mouseX - ringX) * .15;
 
-            const y =
-                (event.clientY /
-                window.innerHeight -
-                0.5);
+    ringY +=
+        (mouseY - ringY) * .15;
 
 
-            /*
-               Subtle 3D movement
-            */
+    /*
+        Heart smoothing
+    */
 
-            const rotateY =
-                x * 10;
+    heartX +=
+        (mouseX - heartX) * .12;
 
-            const rotateX =
-                y * -10;
-
-
-            watch.style.transform =
-                `
-                translateY(0)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                `;
-        }
-    );
+    heartY +=
+        (mouseY - heartY) * .12;
 
 
-    document.addEventListener(
-        "mouseleave",
-        function() {
+    cursorDot.style.left =
+        mouseX + "px";
 
-            watch.style.transform =
-                "";
-        }
+    cursorDot.style.top =
+        mouseY + "px";
+
+
+    cursorRing.style.left =
+        ringX + "px";
+
+    cursorRing.style.top =
+        ringY + "px";
+
+
+    pointerHeart.style.left =
+        heartX + "px";
+
+    pointerHeart.style.top =
+        heartY + "px";
+
+
+    requestAnimationFrame(
+        animatePointer
     );
 }
 
 
-/* =========================================================
-   WATCH DOUBLE CLICK / TAP LITTLE HEART
-========================================================= */
-
-watch.addEventListener(
-    "dblclick",
+document.addEventListener(
+    "mousemove",
     function(event) {
 
-        createBigHeart(
-            event.clientX,
-            event.clientY
+        mouseX =
+            event.clientX;
+
+        mouseY =
+            event.clientY;
+
+
+        pointerHeart.classList.add(
+            "show"
         );
 
+
+        /*
+            Create tiny heart trail
+        */
+
+        const now =
+            Date.now();
+
+        if (
+            now - lastTrail > 100
+        ) {
+
+            createHeartTrail(
+                mouseX,
+                mouseY
+            );
+
+            lastTrail = now;
+        }
     }
 );
 
 
-function createBigHeart(x, y) {
+function createHeartTrail(
+    x,
+    y
+) {
 
     const heart =
         document.createElement("div");
 
     heart.className =
-        "touch-heart";
+        "trail-heart";
 
     heart.textContent =
         "♥";
-
-    heart.style.fontSize =
-        "42px";
 
     heart.style.left =
         x + "px";
@@ -1744,28 +2195,234 @@ function createBigHeart(x, y) {
     heart.style.top =
         y + "px";
 
+    heart.style.fontSize =
+        (8 + Math.random() * 8)
+        + "px";
 
-    document.body.appendChild(heart);
+    document.body.appendChild(
+        heart
+    );
 
 
     setTimeout(
         () => heart.remove(),
-        1100
+        900
     );
 }
 
 
+animatePointer();
+
+
+
 /* =========================================================
-   PREVENT ACCIDENTAL LONG PRESS MENU ON WATCH
+   TOUCH SUPPORT
+   Heart follows finger on mobile
 ========================================================= */
 
-watch.addEventListener(
-    "contextmenu",
+document.addEventListener(
+    "touchmove",
     function(event) {
-        event.preventDefault();
+
+        const touch =
+            event.touches[0];
+
+        if (!touch) return;
+
+        const x =
+            touch.clientX;
+
+        const y =
+            touch.clientY;
+
+
+        pointerHeart.style.left =
+            x + "px";
+
+        pointerHeart.style.top =
+            y + "px";
+
+        pointerHeart.classList.add(
+            "show"
+        );
+
+
+        createHeartTrail(
+            x,
+            y
+        );
+
+    },
+    {
+        passive: true
     }
 );
 
+
+document.addEventListener(
+    "touchend",
+    function() {
+
+        setTimeout(
+            () => {
+                pointerHeart.classList.remove(
+                    "show"
+                );
+            },
+            500
+        );
+    }
+);
+
+
+
+/* =========================================================
+   3D WATCH PARALLAX
+========================================================= */
+
+const watch =
+    document.querySelector(".watch");
+
+const clockStage =
+    document.querySelector(".clock-stage");
+
+
+document.addEventListener(
+    "mousemove",
+    function(event) {
+
+        if (
+            window.innerWidth < 700
+        ) return;
+
+
+        const rect =
+            clockStage.getBoundingClientRect();
+
+
+        const centerX =
+            rect.left +
+            rect.width / 2;
+
+        const centerY =
+            rect.top +
+            rect.height / 2;
+
+
+        const dx =
+            (event.clientX - centerX)
+            / rect.width;
+
+        const dy =
+            (event.clientY - centerY)
+            / rect.height;
+
+
+        const rotateX =
+            dy * -8;
+
+        const rotateY =
+            dx * 10;
+
+
+        watch.style.transform =
+            `
+            translateY(-4px)
+            rotateX(${rotateX}deg)
+            rotateY(${rotateY}deg)
+            `;
+    }
+);
+
+
+document.addEventListener(
+    "mouseleave",
+    function() {
+
+        watch.style.transform =
+            "";
+    }
+);
+
+
+
+/* =========================================================
+   CLICK HEART BURST
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        /*
+            Don't make buttons/interactive areas annoying.
+            Small decorative burst only.
+        */
+
+        for (
+            let i = 0;
+            i < 5;
+            i++
+        ) {
+
+            const heart =
+                document.createElement(
+                    "div"
+                );
+
+            heart.className =
+                "trail-heart";
+
+            heart.textContent =
+                i % 2 === 0
+                ? "♥"
+                : "✦";
+
+            heart.style.left =
+                event.clientX + "px";
+
+            heart.style.top =
+                event.clientY + "px";
+
+            heart.style.fontSize =
+                (8 + Math.random() * 10)
+                + "px";
+
+
+            heart.style.animation =
+                "trail .9s ease-out forwards";
+
+
+            document.body.appendChild(
+                heart
+            );
+
+
+            setTimeout(
+                () => heart.remove(),
+                900
+            );
+        }
+    }
+);
+
+
+
+/* =========================================================
+   RESPECT REDUCED MOTION
+========================================================= */
+
+const reducedMotion =
+    window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
+
+
+if (reducedMotion.matches) {
+
+    pointerHeart.style.display =
+        "none";
+}
 </script>
 
 </body>
