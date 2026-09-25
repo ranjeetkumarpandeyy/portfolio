@@ -1,353 +1,776 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ranjeet</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-  :root{
-    --cream:#f3ead9;
-    --cream2:#ece0cb;
-    --mocha:#6f5a45;
-    --plum:#332621;
-    --rose:#d9a9a0;
-    --rose2:#c98a8f;
-    --gold:#b98f4f;
-    --line:rgba(51,38,33,0.12);
-  }
-  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:'Jost',sans-serif;
-    background:var(--cream);
-    color:var(--plum);
-    line-height:1.7;
-    font-weight:300;
-    overflow-x:hidden;
-  }
-  ::selection{background:var(--rose);color:var(--cream);}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  #bg3d{position:fixed;inset:0;z-index:0;pointer-events:none;}
-  body::after{
-    content:'';position:fixed;inset:0;z-index:3;pointer-events:none;opacity:0.045;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-  .orb{position:fixed;border-radius:50%;filter:blur(70px);z-index:0;pointer-events:none;}
-  .orb1{width:360px;height:360px;background:var(--rose);opacity:0.25;top:-100px;right:-110px;}
-  .orb2{width:300px;height:300px;background:var(--gold);opacity:0.16;bottom:-70px;left:-90px;}
+  <title>MJIS — Maa Janki Industrial Services | Coming Soon</title>
 
-  section{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:110px 28px;}
-  h1,h2,.serif{font-family:'Cormorant Garamond',serif;}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* HERO */
-  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 28px;}
-  .tilt-wrap{perspective:900px;margin-bottom:30px;animation:rise 1s ease both;}
-  .monogram{
-    width:100px;height:100px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:500;
-    background:linear-gradient(160deg,var(--cream2),#fff);
-    border:1px solid var(--line);color:var(--mocha);
-    box-shadow:0 24px 40px -18px rgba(51,38,33,0.35);
-    transition:transform 0.15s ease-out;
-    transform-style:preserve-3d;
-  }
-  .hero h1{font-size:clamp(2.6rem,7vw,4.2rem);font-weight:500;font-style:italic;color:var(--plum);animation:rise 1s ease 0.1s both;}
-  .hero .role{margin-top:14px;font-size:0.95rem;letter-spacing:0.03em;color:var(--mocha);animation:rise 1s ease 0.2s both;}
-  .hero .role .dot{color:var(--rose2);margin:0 8px;}
-  .hero p.line{max-width:420px;margin:26px auto 0;font-size:1rem;color:var(--plum);opacity:0.8;animation:rise 1s ease 0.3s both;}
-  .scrolldown{margin-top:60px;font-size:0.75rem;color:var(--mocha);display:flex;flex-direction:column;align-items:center;gap:8px;animation:rise 1s ease 0.4s both;}
-  .scrolldown i{animation:bob 2s ease-in-out infinite;}
-  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
-  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    :root {
+      --pink: #ff4f81;
+      --pink-light: #ffb6c9;
+      --pink-soft: #fff0f5;
+      --text: #171717;
+      --muted: #777;
+      --white: #ffffff;
+    }
 
-  .head{margin-bottom:44px;text-align:left;}
-  .head h2{font-size:2rem;font-weight:500;font-style:italic;color:var(--plum);}
-  .head p{font-size:0.9rem;color:var(--mocha);margin-top:6px;}
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-  /* 3D QUOTE CAROUSEL */
-  .carousel-stage{perspective:1300px;height:260px;display:flex;align-items:center;justify-content:center;}
-  .carousel{position:relative;width:290px;height:190px;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.22,.68,0,1.01);}
-  .qcard{
-    position:absolute;inset:0;
-    display:flex;align-items:center;justify-content:center;text-align:center;
-    padding:26px;border-radius:18px;
-    background:rgba(255,255,255,0.5);
-    border:1px solid var(--line);
-    backdrop-filter:blur(6px);
-    box-shadow:0 20px 40px -20px rgba(51,38,33,0.3);
-  }
-  .qcard p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.18rem;color:var(--plum);line-height:1.5;}
-  .carousel-nav{display:flex;justify-content:center;gap:18px;margin-top:26px;}
-  .carousel-nav button{
-    width:38px;height:38px;border-radius:50%;border:1px solid var(--line);
-    background:rgba(255,255,255,0.4);color:var(--mocha);cursor:pointer;
-    transition:all 0.25s ease;
-  }
-  .carousel-nav button:hover{background:var(--rose);color:#fff;transform:translateY(-2px);}
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
 
-  /* TAG CLOUD (replaces like/dislike list) */
-  .cloud{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start;}
-  .chip{
-    padding:10px 18px;border-radius:30px;
-    background:rgba(255,255,255,0.45);
-    border:1px solid var(--line);
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.02rem;
-    color:var(--plum);
-    transform-style:preserve-3d;
-    transition:transform 0.15s ease-out,background 0.3s ease;
-    cursor:default;
-  }
-  .chip:hover{background:rgba(255,255,255,0.75);}
+    /* -------------------------
+       BACKGROUND
+    ------------------------- */
 
-  /* NOTE FORM */
-  .note-card{
-    border:1px solid var(--line);border-radius:20px;
-    background:rgba(255,255,255,0.35);
-    padding:34px;
-    box-shadow:0 24px 48px -26px rgba(51,38,33,0.3);
-  }
-  .note-card p.intro{font-size:0.92rem;color:var(--mocha);margin-bottom:24px;}
-  .form-group{margin-bottom:18px;}
-  .form-group label{display:block;font-size:0.78rem;letter-spacing:0.03em;color:var(--mocha);margin-bottom:7px;}
-  .form-group input,.form-group textarea{
-    width:100%;padding:12px 14px;border-radius:10px;
-    border:1px solid var(--line);background:rgba(255,255,255,0.6);
-    font-family:'Jost',sans-serif;font-size:0.92rem;color:var(--plum);
-    outline:none;transition:border-color 0.25s ease;
-  }
-  .form-group input:focus,.form-group textarea:focus{border-color:var(--rose2);}
-  .form-group textarea{min-height:110px;resize:vertical;}
-  .hp{position:absolute;left:-9999px;}
-  .note-submit{
-    padding:12px 30px;border-radius:30px;border:none;cursor:pointer;
-    background:linear-gradient(135deg,var(--rose2),var(--gold));
-    color:#fff;font-size:0.9rem;letter-spacing:0.02em;
-    transition:transform 0.25s ease,box-shadow 0.25s ease;
-  }
-  .note-submit:hover{transform:translateY(-3px);box-shadow:0 16px 30px -14px rgba(201,138,143,0.6);}
-  .note-thanks{display:none;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--mocha);}
+    .background {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  /* CONNECT */
-  .connect-grid{display:flex;flex-direction:column;gap:12px;}
-  .connect-row{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:18px 22px;border:1px solid var(--line);border-radius:14px;
-    text-decoration:none;color:var(--plum);
-    background:rgba(255,255,255,0.25);
-    transition:all 0.3s ease;
-  }
-  .connect-row:hover{background:rgba(255,255,255,0.55);transform:translateX(4px);}
-  .connect-row .left{display:flex;align-items:center;gap:14px;}
-  .connect-row i{font-size:1.1rem;color:var(--mocha);width:20px;text-align:center;}
-  .connect-row .label{font-size:0.98rem;}
-  .connect-row .sub{font-size:0.78rem;color:var(--mocha);opacity:0.75;}
-  .connect-row .arrow{font-size:0.85rem;color:var(--rose2);}
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: 0.45;
+      animation: floatBlob 10s ease-in-out infinite alternate;
+    }
 
-  footer{text-align:center;padding:50px 28px 70px;font-size:0.78rem;color:var(--mocha);position:relative;z-index:1;}
-  footer .serif{font-style:italic;font-size:1rem;color:var(--plum);display:block;margin-bottom:6px;}
-</style>
-</head>
-<body>
+    .blob.one {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, #ffd6e3, transparent 70%);
+      top: -100px;
+      left: -100px;
+    }
 
-<canvas id="bg3d"></canvas>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
+    .blob.two {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #ffe6ee, transparent 70%);
+      right: -150px;
+      bottom: -130px;
+      animation-delay: -4s;
+    }
 
-<!-- HERO -->
-<section class="hero">
-  <div class="tilt-wrap"><div class="monogram" id="tiltMono">R</div></div>
-  <h1>Ranjeet</h1>
-  <p class="role">AI/ML Intern <span class="dot">&middot;</span> CDAC Mohali</p>
-  <p class="line">A quiet corner on the internet for the things I love, the words I keep coming back to, and the people I'd like to hear from.</p>
-  <div class="scrolldown"><span>scroll</span><i class="fas fa-chevron-down"></i></div>
-</section>
+    .blob.three {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, #ffd0df, transparent 70%);
+      right: 15%;
+      top: 10%;
+      animation-delay: -7s;
+    }
 
-<!-- QUOTES CAROUSEL -->
-<section id="quotes">
-  <div class="head"><h2>words I sit with</h2><p>a few lines I return to, on the days that need them</p></div>
-  <div class="carousel-stage">
-    <div class="carousel" id="carousel">
-      <div class="qcard"><p>Some people don't need a reason to be loved &mdash; they just need someone who stays long enough to notice.</p></div>
-      <div class="qcard"><p>Softness is not weakness. It's just a heart that refused to close.</p></div>
-      <div class="qcard"><p>I am learning that peace is not the absence of feeling, but the courage to feel gently.</p></div>
-      <div class="qcard"><p>Some hearts speak in silence, and I've learned to listen for that too.</p></div>
-      <div class="qcard"><p>Love, when it's real, doesn't ask you to shrink &mdash; it asks you to stay soft.</p></div>
-    </div>
-  </div>
-  <div class="carousel-nav"><button id="prevQ"><i class="fas fa-chevron-left"></i></button><button id="nextQ"><i class="fas fa-chevron-right"></i></button></div>
-</section>
-
-<!-- LITTLE THINGS -->
-<section id="little-things">
-  <div class="head"><h2>little things</h2><p>bits and pieces that make up my days</p></div>
-  <div class="cloud" id="cloud">
-    <span class="chip">rainy evenings</span>
-    <span class="chip">honest conversations</span>
-    <span class="chip">old songs on repeat</span>
-    <span class="chip">handwritten notes</span>
-    <span class="chip">slow mornings</span>
-    <span class="chip">warm coffee</span>
-    <span class="chip">people who stay</span>
-    <span class="chip">quiet nights</span>
-    <span class="chip">gentle humour</span>
-    <span class="chip">long calls</span>
-  </div>
-</section>
-
-<!-- ANONYMOUS NOTE -->
-<section id="note">
-  <div class="head"><h2>leave me a note</h2><p>say what you want, no names needed</p></div>
-  <div class="note-card">
-    <p class="intro">This goes straight to me, quietly. Say it softly or say it honestly &mdash; either is fine.</p>
-    <form name="anonymous-note" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="noteForm">
-      <input type="hidden" name="form-name" value="anonymous-note" />
-      <p class="hp"><label>Leave this empty: <input name="bot-field" /></label></p>
-      <div class="form-group">
-        <label>your name (optional)</label>
-        <input type="text" name="name" placeholder="anonymous">
-      </div>
-      <div class="form-group">
-        <label>your note</label>
-        <textarea name="message" required placeholder="say what you want to say..."></textarea>
-      </div>
-      <button type="submit" class="note-submit">send it quietly</button>
-      <p class="note-thanks" id="noteThanks">it reached me. thank you for saying it.</p>
-    </form>
-  </div>
-</section>
-
-<!-- CONNECT -->
-<section id="connect">
-  <div class="head"><h2>find me here</h2><p>say hello, quietly or loudly</p></div>
-  <div class="connect-grid">
-    <a class="connect-row" href="https://www.instagram.com/btw_ranjeet/" target="_blank">
-      <div class="left"><i class="fab fa-instagram"></i><div><div class="label">Instagram</div><div class="sub">@btw_ranjeet</div></div></div>
-      <i class="fas fa-arrow-up-right-from-square arrow"></i>
-    </a>
-    <a class="connect-row" href="https://in.pinterest.com/btwranjeet/" target="_blank">
-      <div class="left"><i class="fab fa-pinterest"></i><div><div class="label">Pinterest</div><div class="sub">my mood boards</div></div></div>
-      <i class="fas fa-arrow-up-right-from-square arrow"></i>
-    </a>
-    <a class="connect-row" href="tel:+918873353652">
-      <div class="left"><i class="fas fa-phone"></i><div><div class="label">Call</div><div class="sub">+91 88733 53652</div></div></div>
-      <i class="fas fa-arrow-up-right-from-square arrow"></i>
-    </a>
-    <a class="connect-row" href="mailto:love@ranjeetpandey.xyz">
-      <div class="left"><i class="fas fa-envelope"></i><div><div class="label">Email</div><div class="sub">love@ranjeetpandey.xyz</div></div></div>
-      <i class="fas fa-arrow-up-right-from-square arrow"></i>
-    </a>
-  </div>
-</section>
-
-<footer><span class="serif">with love, Ranjeet</span><span>&copy; 2026</span></footer>
-
-<script>
-/* ===== 3D PARTICLE BACKGROUND ===== */
-const canvas=document.getElementById('bg3d');
-const ctx=canvas.getContext('2d');
-let W,H;
-function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
-resize();window.addEventListener('resize',resize);
-const N=48;
-const pts=Array.from({length:N},()=>({
-  x:Math.random()*W,y:Math.random()*H,
-  vx:(Math.random()-0.5)*0.35,vy:(Math.random()-0.5)*0.35,
-  depth:Math.random()
-}));
-let mx=-9999,my=-9999;
-window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  for(let i=0;i<N;i++){
-    const p=pts[i];
-    const speed=0.3+p.depth*0.5;
-    p.x+=p.vx*speed;p.y+=p.vy*speed;
-    if(p.x<0||p.x>W)p.vx*=-1;
-    if(p.y<0||p.y>H)p.vy*=-1;
-    const dx=mx-p.x,dy=my-p.y,dist=Math.hypot(dx,dy);
-    if(dist<150){p.x+=dx*0.006;p.y+=dy*0.006;}
-    const r=1+p.depth*2.2;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(201,138,143,${0.15+p.depth*0.35})`;
-    ctx.fill();
-    for(let j=i+1;j<N;j++){
-      const p2=pts[j];
-      const d=Math.hypot(p.x-p2.x,p.y-p2.y);
-      if(d<120){
-        const avg=(p.depth+p2.depth)/2;
-        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);
-        ctx.strokeStyle=`rgba(185,143,79,${(1-d/120)*0.15*avg})`;
-        ctx.lineWidth=avg;
-        ctx.stroke();
+    @keyframes floatBlob {
+      from {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      to {
+        transform: translate3d(30px, -25px, 0) scale(1.12);
       }
     }
-  }
-  requestAnimationFrame(draw);
-}
-draw();
 
-/* ===== HERO MONOGRAM 3D TILT ===== */
-const mono=document.getElementById('tiltMono');
-document.addEventListener('mousemove',e=>{
-  const x=(e.clientX/window.innerWidth-0.5)*24;
-  const y=(e.clientY/window.innerHeight-0.5)*-24;
-  mono.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`;
-});
+    /* -------------------------
+       MAIN
+    ------------------------- */
 
-/* ===== TAG CHIP 3D TILT ===== */
-document.querySelectorAll('.chip').forEach(chip=>{
-  chip.addEventListener('mousemove',e=>{
-    const r=chip.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-0.5;
-    const y=(e.clientY-r.top)/r.height-0.5;
-    chip.style.transform=`perspective(400px) rotateX(${-y*18}deg) rotateY(${x*18}deg) translateZ(6px)`;
-  });
-  chip.addEventListener('mouseleave',()=>{chip.style.transform='';});
-});
+    .page {
+      width: min(1200px, 94%);
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 50px;
+      position: relative;
+      z-index: 2;
+      padding: 50px 0;
+    }
 
-/* ===== 3D QUOTE CAROUSEL ===== */
-const carousel=document.getElementById('carousel');
-const cards=carousel.querySelectorAll('.qcard');
-const count=cards.length;
-const radius=300;
-let angleStep=360/count;
-let current=0;
-cards.forEach((card,i)=>{
-  card.style.transform=`rotateY(${i*angleStep}deg) translateZ(${radius}px)`;
-});
-function updateCarousel(){
-  carousel.style.transform=`rotateY(${-current*angleStep}deg)`;
-}
-document.getElementById('nextQ').addEventListener('click',()=>{current=(current+1)%count;updateCarousel();});
-document.getElementById('prevQ').addEventListener('click',()=>{current=(current-1+count)%count;updateCarousel();});
-let autoTimer=setInterval(()=>{current=(current+1)%count;updateCarousel();},5000);
-carousel.closest('.carousel-stage').addEventListener('mouseenter',()=>clearInterval(autoTimer));
+    /* -------------------------
+       LEFT CONTENT
+    ------------------------- */
 
-/* ===== NETLIFY FORM — AJAX SUBMIT ===== */
-function encode(data){
-  return Object.keys(data).map(k=>encodeURIComponent(k)+"="+encodeURIComponent(data[k])).join("&");
-}
-const noteForm=document.getElementById('noteForm');
-noteForm.addEventListener('submit',function(e){
-  e.preventDefault();
-  const data={
-    "form-name":noteForm.getAttribute("name"),
-    name:noteForm.name.value,
-    message:noteForm.message.value
-  };
-  fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:encode(data)})
-    .then(()=>{
-      noteForm.reset();
-      document.getElementById('noteThanks').style.display='block';
-      noteForm.querySelector('.note-submit').style.display='none';
-    })
-    .catch(()=>{alert("Something went wrong — try again in a moment.");});
-});
-</script>
+    .content {
+      animation: contentIn 1s ease forwards;
+    }
+
+    @keyframes contentIn {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .brand-logo {
+      width: 55px;
+      height: 55px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #fff, #ffe4ec);
+      box-shadow:
+        10px 10px 25px rgba(255, 79, 129, 0.15),
+        -8px -8px 20px rgba(255, 255, 255, 0.9);
+      color: var(--pink);
+      font-size: 24px;
+      transform: rotate(-5deg);
+    }
+
+    .brand-name {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .brand-subtitle {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .coming {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: var(--pink-soft);
+      color: var(--pink);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+      box-shadow: inset 0 0 0 1px rgba(255, 79, 129, 0.08);
+    }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 92px);
+      line-height: 0.95;
+      letter-spacing: -5px;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      color: var(--pink);
+      display: block;
+    }
+
+    .description {
+      max-width: 590px;
+      color: #666;
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    /* -------------------------
+       HEART
+    ------------------------- */
+
+    .heart-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--pink);
+      font-size: 14px;
+      margin-bottom: 35px;
+    }
+
+    .heart {
+      width: 18px;
+      height: 18px;
+      position: relative;
+      transform: rotate(-45deg);
+      background: var(--pink);
+      animation: heartbeat 1.3s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: var(--pink);
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -9px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: 9px;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: rotate(-45deg) scale(1);
+      }
+
+      15% {
+        transform: rotate(-45deg) scale(1.18);
+      }
+
+      30% {
+        transform: rotate(-45deg) scale(1);
+      }
+
+      45% {
+        transform: rotate(-45deg) scale(1.12);
+      }
+    }
+
+    /* -------------------------
+       3D CLOCK
+    ------------------------- */
+
+    .clock-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+    }
+
+    .clock-wrapper {
+      position: relative;
+      width: min(430px, 80vw);
+      aspect-ratio: 1;
+      transform-style: preserve-3d;
+      animation: clockFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes clockFloat {
+      0%, 100% {
+        transform: translateY(0) rotateX(2deg) rotateY(-4deg);
+      }
+
+      50% {
+        transform: translateY(-15px) rotateX(-2deg) rotateY(4deg);
+      }
+    }
+
+    .clock-shadow {
+      position: absolute;
+      width: 72%;
+      height: 15%;
+      left: 14%;
+      bottom: -7%;
+      border-radius: 50%;
+      background: rgba(255, 79, 129, 0.15);
+      filter: blur(20px);
+      transform: translateZ(-80px);
+    }
+
+    .clock {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 25%, #fff, #fff 35%, #fff6f9 70%, #ffdce7);
+      border: 12px solid white;
+      box-shadow:
+        20px 25px 50px rgba(0, 0, 0, 0.12),
+        inset 0 0 0 2px rgba(255, 79, 129, 0.12),
+        inset 0 -20px 40px rgba(255, 79, 129, 0.08);
+      transform-style: preserve-3d;
+    }
+
+    .clock::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 79, 129, 0.15);
+    }
+
+    .tick {
+      position: absolute;
+      left: 50%;
+      top: 4%;
+      width: 3px;
+      height: 12px;
+      background: #555;
+      transform-origin: 50% 46.5%;
+      border-radius: 10px;
+    }
+
+    .tick.small {
+      width: 2px;
+      height: 7px;
+      background: #aaa;
+    }
+
+    /* Generate ticks using rotation */
+
+    .tick:nth-child(1) {
+      transform: translateX(-50%) rotate(0deg);
+    }
+
+    .tick:nth-child(2) {
+      transform: translateX(-50%) rotate(30deg);
+    }
+
+    .tick:nth-child(3) {
+      transform: translateX(-50%) rotate(60deg);
+    }
+
+    .tick:nth-child(4) {
+      transform: translateX(-50%) rotate(90deg);
+    }
+
+    .tick:nth-child(5) {
+      transform: translateX(-50%) rotate(120deg);
+    }
+
+    .tick:nth-child(6) {
+      transform: translateX(-50%) rotate(150deg);
+    }
+
+    .tick:nth-child(7) {
+      transform: translateX(-50%) rotate(180deg);
+    }
+
+    .tick:nth-child(8) {
+      transform: translateX(-50%) rotate(210deg);
+    }
+
+    .tick:nth-child(9) {
+      transform: translateX(-50%) rotate(240deg);
+    }
+
+    .tick:nth-child(10) {
+      transform: translateX(-50%) rotate(270deg);
+    }
+
+    .tick:nth-child(11) {
+      transform: translateX(-50%) rotate(300deg);
+    }
+
+    .tick:nth-child(12) {
+      transform: translateX(-50%) rotate(330deg);
+    }
+
+    .number {
+      position: absolute;
+      font-size: 22px;
+      font-weight: 800;
+      color: #333;
+      transform: translate(-50%, -50%);
+    }
+
+    .n12 { top: 11%; left: 50%; }
+    .n3 { top: 50%; left: 89%; }
+    .n6 { top: 89%; left: 50%; }
+    .n9 { top: 50%; left: 11%; }
+
+    .digital {
+      position: absolute;
+      left: 50%;
+      top: 66%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(14px, 3vw, 21px);
+      letter-spacing: 3px;
+      font-weight: 900;
+      color: var(--pink);
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.75);
+      padding: 7px 14px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(255, 79, 129, 0.08);
+    }
+
+    .hand {
+      position: absolute;
+      left: 50%;
+      bottom: 50%;
+      transform-origin: 50% 100%;
+      border-radius: 10px;
+      z-index: 5;
+    }
+
+    .hour {
+      width: 9px;
+      height: 25%;
+      background: #222;
+      margin-left: -4.5px;
+    }
+
+    .minute {
+      width: 6px;
+      height: 34%;
+      background: var(--pink);
+      margin-left: -3px;
+    }
+
+    .second {
+      width: 2px;
+      height: 39%;
+      background: #222;
+      margin-left: -1px;
+    }
+
+    .center-dot {
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--pink);
+      border: 4px solid white;
+      border-radius: 50%;
+      z-index: 10;
+      box-shadow: 0 3px 10px rgba(255, 79, 129, 0.4);
+    }
+
+    /* -------------------------
+       FOOTER
+    ------------------------- */
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #999;
+      font-size: 12px;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      z-index: 5;
+    }
+
+    .footer strong {
+      color: var(--pink);
+    }
+
+    /* -------------------------
+       FLOATING HEARTS
+    ------------------------- */
+
+    .floating-heart {
+      position: fixed;
+      color: var(--pink-light);
+      font-size: 20px;
+      opacity: 0;
+      animation: rise 8s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .floating-heart:nth-child(1) {
+      left: 10%;
+      bottom: -30px;
+      animation-delay: 0s;
+    }
+
+    .floating-heart:nth-child(2) {
+      left: 28%;
+      bottom: -30px;
+      animation-delay: 3s;
+    }
+
+    .floating-heart:nth-child(3) {
+      left: 72%;
+      bottom: -30px;
+      animation-delay: 1.5s;
+    }
+
+    .floating-heart:nth-child(4) {
+      left: 88%;
+      bottom: -30px;
+      animation-delay: 5s;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(0.5) rotate(0deg);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 0.7;
+      }
+
+      80% {
+        opacity: 0.4;
+      }
+
+      100% {
+        transform: translateY(-110vh) scale(1.4) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    /* -------------------------
+       RESPONSIVE
+    ------------------------- */
+
+    @media (max-width: 850px) {
+      body {
+        align-items: flex-start;
+      }
+
+      .page {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 55px 0 80px;
+        gap: 20px;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .description {
+        font-size: 15px;
+      }
+
+      .clock-area {
+        margin-top: 15px;
+      }
+
+      .clock-wrapper {
+        width: min(330px, 75vw);
+      }
+
+      .footer {
+        bottom: 10px;
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        width: 90%;
+      }
+
+      h1 {
+        font-size: 54px;
+        letter-spacing: -3px;
+      }
+
+      .clock-wrapper {
+        width: 280px;
+      }
+
+      .clock {
+        border-width: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Soft background -->
+  <div class="background">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
+  </div>
+
+  <!-- Floating hearts -->
+  <div class="floating-heart">♥</div>
+  <div class="floating-heart">♥</div>
+  <div class="floating-heart">♥</div>
+  <div class="floating-heart">♥</div>
+
+  <main class="page">
+
+    <!-- LEFT -->
+    <section class="content">
+
+      <div class="brand">
+        <div class="brand-logo">MJ</div>
+
+        <div>
+          <div class="brand-name">MJIS</div>
+          <span class="brand-subtitle">
+            MAA JANKI INDUSTRIAL SERVICES
+          </span>
+        </div>
+      </div>
+
+      <div class="coming">
+        COMING SOON
+      </div>
+
+      <h1>
+        Something
+        <span>Beautiful.</span>
+      </h1>
+
+      <p class="description">
+        Maa Janki Industrial Services is preparing something special.
+        Our new digital home is being crafted with care, precision,
+        and a little bit of love.
+      </p>
+
+      <div class="heart-line">
+        <div class="heart"></div>
+        <span>Building the future, one moment at a time.</span>
+      </div>
+
+    </section>
+
+    <!-- RIGHT / 3D CLOCK -->
+    <section class="clock-area">
+
+      <div class="clock-wrapper">
+
+        <div class="clock-shadow"></div>
+
+        <div class="clock">
+
+          <!-- Clock ticks -->
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+          <div class="tick"></div>
+
+          <!-- Clock numbers -->
+          <div class="number n12">12</div>
+          <div class="number n3">3</div>
+          <div class="number n6">6</div>
+          <div class="number n9">9</div>
+
+          <!-- Hands -->
+          <div class="hand hour" id="hourHand"></div>
+          <div class="hand minute" id="minuteHand"></div>
+          <div class="hand second" id="secondHand"></div>
+
+          <div class="center-dot"></div>
+
+          <!-- Digital live time -->
+          <div class="digital" id="digitalTime">
+            00:00:00
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div class="footer">
+    © <span id="year"></span> <strong>MJIS</strong> · Maa Janki Industrial Services
+  </div>
+
+  <script>
+    /*
+      MJIS LIVE CLOCK
+      Uses the visitor's local system time.
+    */
+
+    function updateClock() {
+
+      const now = new Date();
+
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+
+      // Analog clock angles
+      const hourAngle =
+        ((hours % 12) * 30) +
+        (minutes * 0.5);
+
+      const minuteAngle =
+        (minutes * 6) +
+        (seconds * 0.1);
+
+      const secondAngle =
+        seconds * 6;
+
+      document.getElementById("hourHand").style.transform =
+        `rotate(${hourAngle}deg)`;
+
+      document.getElementById("minuteHand").style.transform =
+        `rotate(${minuteAngle}deg)`;
+
+      document.getElementById("secondHand").style.transform =
+        `rotate(${secondAngle}deg)`;
+
+      // Digital time
+      const h = String(hours).padStart(2, "0");
+      const m = String(minutes).padStart(2, "0");
+      const s = String(seconds).padStart(2, "0");
+
+      document.getElementById("digitalTime").textContent =
+        `${h}:${m}:${s}`;
+    }
+
+    // Footer year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // Start clock
+    updateClock();
+
+    // Update every second
+    setInterval(updateClock, 1000);
+  </script>
+
 </body>
 </html>
