@@ -1,776 +1,1772 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
 
-  <title>MJIS — Maa Janki Industrial Services | Coming Soon</title>
+<title>MJIS — Maa Janki Industrial Services | Coming Soon</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+<style>
+/* =========================================================
+   MJIS — PREMIUM COMING SOON
+   Single HTML file
+   No external libraries
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #ff3f78;
+    --pink2: #ff7da5;
+    --pink3: #ffd6e2;
+    --dark: #151515;
+    --gray: #777;
+    --light: #fff7fa;
+    --border: rgba(255, 63, 120, .12);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+    color: var(--dark);
+    background:
+        radial-gradient(circle at 10% 10%, #fff0f5 0%, transparent 28%),
+        radial-gradient(circle at 90% 80%, #fff1f6 0%, transparent 30%),
+        #fff;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: .45;
+}
+
+.glow-1 {
+    width: 360px;
+    height: 360px;
+    background: #ffd8e5;
+    left: -150px;
+    top: -100px;
+    animation: glowMove1 12s ease-in-out infinite alternate;
+}
+
+.glow-2 {
+    width: 420px;
+    height: 420px;
+    background: #ffe8ef;
+    right: -180px;
+    bottom: -120px;
+    animation: glowMove2 15s ease-in-out infinite alternate;
+}
+
+.glow-3 {
+    width: 230px;
+    height: 230px;
+    background: #ffdce7;
+    right: 30%;
+    top: 5%;
+    opacity: .22;
+    animation: glowMove3 10s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove1 {
+    to {
+        transform: translate(80px, 70px) scale(1.15);
     }
+}
 
-    :root {
-      --pink: #ff4f81;
-      --pink-light: #ffb6c9;
-      --pink-soft: #fff0f5;
-      --text: #171717;
-      --muted: #777;
-      --white: #ffffff;
+@keyframes glowMove2 {
+    to {
+        transform: translate(-80px, -60px) scale(1.12);
     }
+}
 
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #fff;
-      color: var(--text);
-      overflow-x: hidden;
+@keyframes glowMove3 {
+    to {
+        transform: translate(-50px, 70px) scale(1.3);
     }
+}
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
+/* =========================================================
+   PAGE
+========================================================= */
 
-    /* -------------------------
-       BACKGROUND
-    ------------------------- */
+.page {
+    min-height: 100vh;
+    width: min(1400px, 94%);
+    margin: auto;
 
-    .background {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 0;
-    }
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(30px, 6vw, 100px);
 
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(2px);
-      opacity: 0.45;
-      animation: floatBlob 10s ease-in-out infinite alternate;
-    }
+    padding: 50px 20px 80px;
+    position: relative;
+    z-index: 2;
+}
 
-    .blob.one {
-      width: 350px;
-      height: 350px;
-      background: radial-gradient(circle, #ffd6e3, transparent 70%);
-      top: -100px;
-      left: -100px;
-    }
+/* =========================================================
+   LEFT SIDE
+========================================================= */
 
-    .blob.two {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, #ffe6ee, transparent 70%);
-      right: -150px;
-      bottom: -130px;
-      animation-delay: -4s;
-    }
+.content {
+    animation: contentAppear 1.2s cubic-bezier(.2,.8,.2,1) both;
+}
 
-    .blob.three {
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, #ffd0df, transparent 70%);
-      right: 15%;
-      top: 10%;
-      animation-delay: -7s;
-    }
-
-    @keyframes floatBlob {
-      from {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-      to {
-        transform: translate3d(30px, -25px, 0) scale(1.12);
-      }
-    }
-
-    /* -------------------------
-       MAIN
-    ------------------------- */
-
-    .page {
-      width: min(1200px, 94%);
-      min-height: 90vh;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      align-items: center;
-      gap: 50px;
-      position: relative;
-      z-index: 2;
-      padding: 50px 0;
-    }
-
-    /* -------------------------
-       LEFT CONTENT
-    ------------------------- */
-
-    .content {
-      animation: contentIn 1s ease forwards;
-    }
-
-    @keyframes contentIn {
-      from {
+@keyframes contentAppear {
+    from {
         opacity: 0;
-        transform: translateY(35px);
-      }
+        transform: translateY(40px);
+    }
 
-      to {
+    to {
         opacity: 1;
         transform: translateY(0);
-      }
     }
+}
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 30px;
+/* BRAND */
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 34px;
+}
+
+.brand-icon {
+    width: 58px;
+    height: 58px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(145deg, #ffffff, #ffe4ed);
+
+    color: var(--pink);
+
+    font-weight: 900;
+    font-size: 21px;
+
+    box-shadow:
+        12px 12px 25px rgba(255,63,120,.12),
+        -8px -8px 20px white,
+        inset 0 0 0 1px rgba(255,63,120,.08);
+
+    transform: rotate(-5deg);
+}
+
+.brand-name {
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.brand-small {
+    margin-top: 4px;
+    font-size: 10px;
+    letter-spacing: 1.7px;
+    color: #999;
+}
+
+/* COMING SOON BADGE */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px 16px;
+
+    border-radius: 100px;
+
+    background: rgba(255,63,120,.06);
+
+    color: var(--pink);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    border: 1px solid rgba(255,63,120,.08);
+
+    margin-bottom: 20px;
+}
+
+.badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--pink);
+    box-shadow: 0 0 0 5px rgba(255,63,120,.08);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(.65);
+        box-shadow: 0 0 0 9px rgba(255,63,120,.02);
     }
+}
 
-    .brand-logo {
-      width: 55px;
-      height: 55px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(145deg, #fff, #ffe4ec);
-      box-shadow:
-        10px 10px 25px rgba(255, 79, 129, 0.15),
-        -8px -8px 20px rgba(255, 255, 255, 0.9);
-      color: var(--pink);
-      font-size: 24px;
-      transform: rotate(-5deg);
-    }
+/* HEADING */
 
-    .brand-name {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
+h1 {
+    font-size: clamp(54px, 7vw, 105px);
+    line-height: .9;
+    letter-spacing: -6px;
+    font-weight: 900;
+    margin-bottom: 28px;
+}
 
-    .brand-subtitle {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 1px;
-      margin-top: 4px;
-    }
+h1 .line {
+    display: block;
+}
 
-    .coming {
-      display: inline-block;
-      padding: 8px 16px;
-      border-radius: 50px;
-      background: var(--pink-soft);
-      color: var(--pink);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      margin-bottom: 18px;
-      box-shadow: inset 0 0 0 1px rgba(255, 79, 129, 0.08);
-    }
+h1 .pink {
+    color: var(--pink);
+    position: relative;
+}
 
-    h1 {
-      font-size: clamp(48px, 7vw, 92px);
-      line-height: 0.95;
-      letter-spacing: -5px;
-      margin-bottom: 25px;
-    }
+h1 .pink::after {
+    content: "";
+    position: absolute;
+    width: 55%;
+    height: 8px;
+    border-radius: 100px;
+    background: #ffd6e2;
+    left: 2px;
+    bottom: -3px;
+    z-index: -1;
+    transform: rotate(-2deg);
+}
 
-    h1 span {
-      color: var(--pink);
-      display: block;
-    }
+/* DESCRIPTION */
 
-    .description {
-      max-width: 590px;
-      color: #666;
-      font-size: 17px;
-      line-height: 1.8;
-      margin-bottom: 35px;
-    }
+.description {
+    max-width: 590px;
 
-    /* -------------------------
-       HEART
-    ------------------------- */
+    font-size: 17px;
+    line-height: 1.85;
 
-    .heart-line {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--pink);
-      font-size: 14px;
-      margin-bottom: 35px;
-    }
+    color: #707070;
 
-    .heart {
-      width: 18px;
-      height: 18px;
-      position: relative;
-      transform: rotate(-45deg);
-      background: var(--pink);
-      animation: heartbeat 1.3s infinite;
-    }
+    margin-bottom: 30px;
+}
 
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      background: var(--pink);
-      border-radius: 50%;
-    }
+/* LOVE LINE */
 
-    .heart::before {
-      top: -9px;
-      left: 0;
-    }
+.love-line {
+    display: flex;
+    align-items: center;
+    gap: 13px;
 
-    .heart::after {
-      top: 0;
-      left: 9px;
-    }
+    color: #888;
 
-    @keyframes heartbeat {
-      0%, 100% {
+    font-size: 13px;
+    letter-spacing: .3px;
+
+    margin-bottom: 38px;
+}
+
+.love-heart {
+    width: 17px;
+    height: 17px;
+
+    position: relative;
+
+    background: var(--pink);
+
+    transform: rotate(-45deg);
+
+    animation: heartbeat 1.5s infinite;
+}
+
+.love-heart::before,
+.love-heart::after {
+    content: "";
+
+    position: absolute;
+
+    width: 17px;
+    height: 17px;
+
+    background: var(--pink);
+
+    border-radius: 50%;
+}
+
+.love-heart::before {
+    top: -8px;
+    left: 0;
+}
+
+.love-heart::after {
+    top: 0;
+    left: 8px;
+}
+
+@keyframes heartbeat {
+    0%,100% {
         transform: rotate(-45deg) scale(1);
-      }
+    }
 
-      15% {
-        transform: rotate(-45deg) scale(1.18);
-      }
+    15% {
+        transform: rotate(-45deg) scale(1.2);
+    }
 
-      30% {
+    30% {
         transform: rotate(-45deg) scale(1);
-      }
+    }
 
-      45% {
+    45% {
         transform: rotate(-45deg) scale(1.12);
-      }
+    }
+}
+
+/* =========================================================
+   LIVE TIME CARD
+========================================================= */
+
+.time-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 13px 18px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,.72);
+
+    border: 1px solid rgba(255,63,120,.1);
+
+    box-shadow:
+        10px 15px 35px rgba(0,0,0,.05),
+        inset 0 1px 0 white;
+
+    backdrop-filter: blur(15px);
+}
+
+.live-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #27c46b;
+
+    box-shadow:
+        0 0 0 5px rgba(39,196,107,.08),
+        0 0 18px rgba(39,196,107,.4);
+}
+
+.time-info small {
+    display: block;
+
+    color: #999;
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 3px;
+}
+
+#miniTime {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+/* =========================================================
+   3D WATCH
+========================================================= */
+
+.watch-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    perspective: 1400px;
+
+    min-height: 600px;
+}
+
+.watch-float {
+    position: relative;
+
+    width: min(500px, 80vw);
+    aspect-ratio: 1;
+
+    transform-style: preserve-3d;
+
+    animation:
+        watchFloat 6s ease-in-out infinite;
+
+    transition:
+        transform .2s ease-out;
+}
+
+@keyframes watchFloat {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotateX(3deg)
+            rotateY(-5deg);
     }
 
-    /* -------------------------
-       3D CLOCK
-    ------------------------- */
+    50% {
+        transform:
+            translateY(-17px)
+            rotateX(-3deg)
+            rotateY(5deg);
+    }
+}
 
-    .clock-area {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      perspective: 1000px;
+/* WATCH SHADOW */
+
+.watch-shadow {
+    position: absolute;
+
+    width: 70%;
+    height: 14%;
+
+    left: 15%;
+    bottom: -2%;
+
+    border-radius: 50%;
+
+    background: rgba(255,63,120,.18);
+
+    filter: blur(25px);
+
+    transform: translateZ(-100px);
+}
+
+/* WATCH BODY */
+
+.watch {
+    position: absolute;
+    inset: 3%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 20%,
+            white 0%,
+            white 30%,
+            #fff5f8 65%,
+            #ffdce7 100%
+        );
+
+    border: 13px solid white;
+
+    box-shadow:
+        30px 35px 70px rgba(0,0,0,.13),
+        -10px -10px 30px white,
+        inset 0 0 0 2px rgba(255,63,120,.08),
+        inset 0 -20px 50px rgba(255,63,120,.08);
+
+    transform-style: preserve-3d;
+}
+
+/* WATCH SIDE DEPTH */
+
+.watch::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -25px;
+
+    border-radius: 50%;
+
+    border: 20px solid rgba(255,63,120,.05);
+
+    transform: translateZ(-20px);
+}
+
+.watch::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 16px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,63,120,.15);
+}
+
+/* CROWN */
+
+.crown {
+    position: absolute;
+
+    right: -25px;
+    top: 42%;
+
+    width: 27px;
+    height: 65px;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffd4e1,
+            #fff,
+            #ffb7ca
+        );
+
+    box-shadow:
+        5px 7px 14px rgba(0,0,0,.1);
+
+    transform: translateZ(-5px);
+}
+
+/* CLOCK TICKS */
+
+.tick {
+    position: absolute;
+
+    width: 4px;
+    height: 13px;
+
+    top: 3.7%;
+    left: 50%;
+
+    transform-origin:
+        50% 46%;
+
+    border-radius: 10px;
+
+    background: #444;
+
+    z-index: 2;
+}
+
+.tick.small {
+    width: 2px;
+    height: 8px;
+    background: #aaa;
+}
+
+/* Tick rotations */
+
+.t1  { transform: translateX(-50%) rotate(0deg); }
+.t2  { transform: translateX(-50%) rotate(30deg); }
+.t3  { transform: translateX(-50%) rotate(60deg); }
+.t4  { transform: translateX(-50%) rotate(90deg); }
+.t5  { transform: translateX(-50%) rotate(120deg); }
+.t6  { transform: translateX(-50%) rotate(150deg); }
+.t7  { transform: translateX(-50%) rotate(180deg); }
+.t8  { transform: translateX(-50%) rotate(210deg); }
+.t9  { transform: translateX(-50%) rotate(240deg); }
+.t10 { transform: translateX(-50%) rotate(270deg); }
+.t11 { transform: translateX(-50%) rotate(300deg); }
+.t12 { transform: translateX(-50%) rotate(330deg); }
+
+/* NUMBERS */
+
+.number {
+    position: absolute;
+
+    transform: translate(-50%,-50%);
+
+    font-weight: 900;
+
+    color: #292929;
+
+    z-index: 3;
+}
+
+.n12 {
+    left: 50%;
+    top: 11%;
+}
+
+.n3 {
+    left: 89%;
+    top: 50%;
+}
+
+.n6 {
+    left: 50%;
+    top: 89%;
+}
+
+.n9 {
+    left: 11%;
+    top: 50%;
+}
+
+/* HANDS */
+
+.hand {
+    position: absolute;
+
+    left: 50%;
+    bottom: 50%;
+
+    transform-origin: 50% 100%;
+
+    border-radius: 20px;
+
+    z-index: 7;
+}
+
+.hour {
+    width: 10px;
+    height: 23%;
+
+    margin-left: -5px;
+
+    background: #222;
+}
+
+.minute {
+    width: 6px;
+    height: 34%;
+
+    margin-left: -3px;
+
+    background: var(--pink);
+}
+
+.second {
+    width: 2px;
+    height: 39%;
+
+    margin-left: -1px;
+
+    background: #222;
+}
+
+/* CENTER */
+
+.center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 19px;
+    height: 19px;
+
+    transform: translate(-50%,-50%);
+
+    background: var(--pink);
+
+    border: 4px solid white;
+
+    border-radius: 50%;
+
+    z-index: 10;
+
+    box-shadow:
+        0 3px 14px rgba(255,63,120,.4);
+}
+
+/* DIGITAL TIME INSIDE WATCH */
+
+.digital-time {
+    position: absolute;
+
+    left: 50%;
+    top: 67%;
+
+    transform: translate(-50%,-50%);
+
+    padding: 8px 15px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.72);
+
+    border: 1px solid rgba(255,63,120,.08);
+
+    color: var(--pink);
+
+    font-weight: 900;
+
+    font-size: clamp(14px,2.4vw,22px);
+
+    letter-spacing: 3px;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 8px 20px rgba(255,63,120,.08);
+
+    z-index: 6;
+}
+
+/* DATE */
+
+.date-display {
+    position: absolute;
+
+    left: 50%;
+    top: 59%;
+
+    transform: translate(-50%,-50%);
+
+    color: #999;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    z-index: 6;
+}
+
+/* =========================================================
+   CURSOR HEART EFFECT
+========================================================= */
+
+.cursor-heart {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 13px;
+    height: 13px;
+
+    background: var(--pink);
+
+    transform:
+        translate(-50%,-50%)
+        rotate(-45deg)
+        scale(0);
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    opacity: .9;
+
+    animation: cursorHeart .9s ease-out forwards;
+}
+
+.cursor-heart::before,
+.cursor-heart::after {
+    content: "";
+
+    position: absolute;
+
+    width: 13px;
+    height: 13px;
+
+    background: var(--pink);
+
+    border-radius: 50%;
+}
+
+.cursor-heart::before {
+    top: -6px;
+    left: 0;
+}
+
+.cursor-heart::after {
+    top: 0;
+    left: 6px;
+}
+
+@keyframes cursorHeart {
+
+    0% {
+        opacity: 1;
+        transform:
+            translate(-50%,-50%)
+            rotate(-45deg)
+            scale(.2);
     }
 
-    .clock-wrapper {
-      position: relative;
-      width: min(430px, 80vw);
-      aspect-ratio: 1;
-      transform-style: preserve-3d;
-      animation: clockFloat 5s ease-in-out infinite;
+    35% {
+        opacity: 1;
+        transform:
+            translate(-50%,-75%)
+            rotate(-45deg)
+            scale(1);
     }
 
-    @keyframes clockFloat {
-      0%, 100% {
-        transform: translateY(0) rotateX(2deg) rotateY(-4deg);
-      }
-
-      50% {
-        transform: translateY(-15px) rotateX(-2deg) rotateY(4deg);
-      }
-    }
-
-    .clock-shadow {
-      position: absolute;
-      width: 72%;
-      height: 15%;
-      left: 14%;
-      bottom: -7%;
-      border-radius: 50%;
-      background: rgba(255, 79, 129, 0.15);
-      filter: blur(20px);
-      transform: translateZ(-80px);
-    }
-
-    .clock {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 35% 25%, #fff, #fff 35%, #fff6f9 70%, #ffdce7);
-      border: 12px solid white;
-      box-shadow:
-        20px 25px 50px rgba(0, 0, 0, 0.12),
-        inset 0 0 0 2px rgba(255, 79, 129, 0.12),
-        inset 0 -20px 40px rgba(255, 79, 129, 0.08);
-      transform-style: preserve-3d;
-    }
-
-    .clock::after {
-      content: "";
-      position: absolute;
-      inset: 12px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 79, 129, 0.15);
-    }
-
-    .tick {
-      position: absolute;
-      left: 50%;
-      top: 4%;
-      width: 3px;
-      height: 12px;
-      background: #555;
-      transform-origin: 50% 46.5%;
-      border-radius: 10px;
-    }
-
-    .tick.small {
-      width: 2px;
-      height: 7px;
-      background: #aaa;
-    }
-
-    /* Generate ticks using rotation */
-
-    .tick:nth-child(1) {
-      transform: translateX(-50%) rotate(0deg);
-    }
-
-    .tick:nth-child(2) {
-      transform: translateX(-50%) rotate(30deg);
-    }
-
-    .tick:nth-child(3) {
-      transform: translateX(-50%) rotate(60deg);
-    }
-
-    .tick:nth-child(4) {
-      transform: translateX(-50%) rotate(90deg);
-    }
-
-    .tick:nth-child(5) {
-      transform: translateX(-50%) rotate(120deg);
-    }
-
-    .tick:nth-child(6) {
-      transform: translateX(-50%) rotate(150deg);
-    }
-
-    .tick:nth-child(7) {
-      transform: translateX(-50%) rotate(180deg);
-    }
-
-    .tick:nth-child(8) {
-      transform: translateX(-50%) rotate(210deg);
-    }
-
-    .tick:nth-child(9) {
-      transform: translateX(-50%) rotate(240deg);
-    }
-
-    .tick:nth-child(10) {
-      transform: translateX(-50%) rotate(270deg);
-    }
-
-    .tick:nth-child(11) {
-      transform: translateX(-50%) rotate(300deg);
-    }
-
-    .tick:nth-child(12) {
-      transform: translateX(-50%) rotate(330deg);
-    }
-
-    .number {
-      position: absolute;
-      font-size: 22px;
-      font-weight: 800;
-      color: #333;
-      transform: translate(-50%, -50%);
-    }
-
-    .n12 { top: 11%; left: 50%; }
-    .n3 { top: 50%; left: 89%; }
-    .n6 { top: 89%; left: 50%; }
-    .n9 { top: 50%; left: 11%; }
-
-    .digital {
-      position: absolute;
-      left: 50%;
-      top: 66%;
-      transform: translate(-50%, -50%);
-      font-size: clamp(14px, 3vw, 21px);
-      letter-spacing: 3px;
-      font-weight: 900;
-      color: var(--pink);
-      white-space: nowrap;
-      background: rgba(255, 255, 255, 0.75);
-      padding: 7px 14px;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(255, 79, 129, 0.08);
-    }
-
-    .hand {
-      position: absolute;
-      left: 50%;
-      bottom: 50%;
-      transform-origin: 50% 100%;
-      border-radius: 10px;
-      z-index: 5;
-    }
-
-    .hour {
-      width: 9px;
-      height: 25%;
-      background: #222;
-      margin-left: -4.5px;
-    }
-
-    .minute {
-      width: 6px;
-      height: 34%;
-      background: var(--pink);
-      margin-left: -3px;
-    }
-
-    .second {
-      width: 2px;
-      height: 39%;
-      background: #222;
-      margin-left: -1px;
-    }
-
-    .center-dot {
-      position: absolute;
-      width: 17px;
-      height: 17px;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--pink);
-      border: 4px solid white;
-      border-radius: 50%;
-      z-index: 10;
-      box-shadow: 0 3px 10px rgba(255, 79, 129, 0.4);
-    }
-
-    /* -------------------------
-       FOOTER
-    ------------------------- */
-
-    .footer {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #999;
-      font-size: 12px;
-      letter-spacing: 1px;
-      white-space: nowrap;
-      z-index: 5;
-    }
-
-    .footer strong {
-      color: var(--pink);
-    }
-
-    /* -------------------------
-       FLOATING HEARTS
-    ------------------------- */
-
-    .floating-heart {
-      position: fixed;
-      color: var(--pink-light);
-      font-size: 20px;
-      opacity: 0;
-      animation: rise 8s linear infinite;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .floating-heart:nth-child(1) {
-      left: 10%;
-      bottom: -30px;
-      animation-delay: 0s;
-    }
-
-    .floating-heart:nth-child(2) {
-      left: 28%;
-      bottom: -30px;
-      animation-delay: 3s;
-    }
-
-    .floating-heart:nth-child(3) {
-      left: 72%;
-      bottom: -30px;
-      animation-delay: 1.5s;
-    }
-
-    .floating-heart:nth-child(4) {
-      left: 88%;
-      bottom: -30px;
-      animation-delay: 5s;
-    }
-
-    @keyframes rise {
-      0% {
-        transform: translateY(0) scale(0.5) rotate(0deg);
+    100% {
         opacity: 0;
-      }
+        transform:
+            translate(
+                calc(-50% + var(--drift)),
+                calc(-50% - 55px)
+            )
+            rotate(-45deg)
+            scale(.45);
+    }
+}
 
-      15% {
-        opacity: 0.7;
-      }
+/* =========================================================
+   MOBILE TOUCH HEART
+========================================================= */
 
-      80% {
-        opacity: 0.4;
-      }
+.touch-heart {
+    position: fixed;
 
-      100% {
-        transform: translateY(-110vh) scale(1.4) rotate(25deg);
+    pointer-events: none;
+
+    z-index: 9999;
+
+    color: var(--pink);
+
+    font-size: 24px;
+
+    animation: touchHeart 1s ease-out forwards;
+}
+
+@keyframes touchHeart {
+
+    0% {
         opacity: 0;
-      }
+        transform: translate(-50%,-50%) scale(.4);
     }
 
-    /* -------------------------
-       RESPONSIVE
-    ------------------------- */
+    25% {
+        opacity: 1;
+        transform: translate(-50%,-70%) scale(1);
+    }
 
-    @media (max-width: 850px) {
-      body {
-        align-items: flex-start;
-      }
+    100% {
+        opacity: 0;
+        transform: translate(-50%,-170%) scale(.65);
+    }
+}
 
-      .page {
+/* =========================================================
+   FLOATING BACKGROUND HEARTS
+========================================================= */
+
+.bg-heart {
+    position: fixed;
+
+    bottom: -30px;
+
+    color: #ffc7d7;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    opacity: 0;
+
+    animation: floatHeart 9s linear infinite;
+}
+
+.bg-heart:nth-child(1) {
+    left: 8%;
+    animation-delay: 0s;
+}
+
+.bg-heart:nth-child(2) {
+    left: 24%;
+    animation-delay: 2.5s;
+}
+
+.bg-heart:nth-child(3) {
+    left: 70%;
+    animation-delay: 4s;
+}
+
+.bg-heart:nth-child(4) {
+    left: 88%;
+    animation-delay: 1.5s;
+}
+
+@keyframes floatHeart {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(0)
+            scale(.4)
+            rotate(0deg);
+    }
+
+    15% {
+        opacity: .65;
+    }
+
+    80% {
+        opacity: .35;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translateY(-110vh)
+            scale(1.3)
+            rotate(35deg);
+    }
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    position: fixed;
+
+    bottom: 18px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 5;
+
+    color: #aaa;
+
+    font-size: 10px;
+
+    letter-spacing: 1.4px;
+
+    white-space: nowrap;
+}
+
+.footer b {
+    color: var(--pink);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .page {
         grid-template-columns: 1fr;
-        text-align: center;
-        padding: 55px 0 80px;
-        gap: 20px;
-      }
 
-      .content {
+        text-align: center;
+
+        gap: 15px;
+
+        padding-top: 45px;
+    }
+
+    .content {
         display: flex;
         flex-direction: column;
         align-items: center;
-      }
+    }
 
-      .description {
+    .description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .watch-zone {
+        min-height: 500px;
+    }
+
+    .watch-float {
+        width: min(440px, 75vw);
+    }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        min-height: 100svh;
+    }
+
+    .page {
+        width: 92%;
+
+        padding:
+            30px 0
+            70px;
+
+        gap: 5px;
+    }
+
+    .brand {
+        margin-bottom: 22px;
+    }
+
+    .brand-icon {
+        width: 49px;
+        height: 49px;
+        border-radius: 15px;
+        font-size: 17px;
+    }
+
+    .brand-name {
+        font-size: 16px;
+    }
+
+    .brand-small {
+        font-size: 8px;
+    }
+
+    .badge {
+        font-size: 9px;
+        padding: 8px 13px;
+    }
+
+    h1 {
+        font-size: clamp(48px, 15vw, 70px);
+
+        letter-spacing: -4px;
+
+        margin-bottom: 20px;
+    }
+
+    h1 .pink::after {
+        height: 5px;
+    }
+
+    .description {
+        width: 95%;
+
+        font-size: 14px;
+
+        line-height: 1.7;
+
+        margin-bottom: 22px;
+    }
+
+    .love-line {
+        font-size: 11px;
+        margin-bottom: 24px;
+    }
+
+    .time-card {
+        padding: 10px 14px;
+        border-radius: 15px;
+    }
+
+    #miniTime {
+        font-size: 13px;
+    }
+
+    .watch-zone {
+        min-height: 390px;
+        margin-top: 0;
+    }
+
+    .watch-float {
+        width: min(320px, 76vw);
+    }
+
+    .watch {
+        border-width: 9px;
+    }
+
+    .watch::after {
+        inset: 10px;
+    }
+
+    .number {
         font-size: 15px;
-      }
-
-      .clock-area {
-        margin-top: 15px;
-      }
-
-      .clock-wrapper {
-        width: min(330px, 75vw);
-      }
-
-      .footer {
-        bottom: 10px;
-        font-size: 10px;
-      }
     }
 
-    @media (max-width: 480px) {
-      .page {
-        width: 90%;
-      }
-
-      h1 {
-        font-size: 54px;
-        letter-spacing: -3px;
-      }
-
-      .clock-wrapper {
-        width: 280px;
-      }
-
-      .clock {
-        border-width: 8px;
-      }
+    .tick {
+        width: 3px;
+        height: 9px;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
+    .tick.small {
+        height: 6px;
+    }
+
+    .hour {
+        width: 7px;
+        margin-left: -3.5px;
+    }
+
+    .minute {
+        width: 4px;
+        margin-left: -2px;
+    }
+
+    .digital-time {
+        font-size: 12px;
+        letter-spacing: 2px;
+        padding: 6px 9px;
+    }
+
+    .date-display {
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+
+    .crown {
+        width: 18px;
+        height: 42px;
+        right: -16px;
+    }
+
+    .footer {
+        bottom: 9px;
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 370px) {
+
+    .page {
+        padding-top: 22px;
+    }
+
+    h1 {
+        font-size: 45px;
+    }
+
+    .watch-zone {
+        min-height: 330px;
+    }
+
+    .watch-float {
+        width: 270px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-      }
+        transition: none !important;
     }
-  </style>
+}
+</style>
 </head>
+
 
 <body>
 
-  <!-- Soft background -->
-  <div class="background">
-    <div class="blob one"></div>
-    <div class="blob two"></div>
-    <div class="blob three"></div>
-  </div>
+<!-- =======================================================
+     BACKGROUND
+======================================================= -->
 
-  <!-- Floating hearts -->
-  <div class="floating-heart">♥</div>
-  <div class="floating-heart">♥</div>
-  <div class="floating-heart">♥</div>
-  <div class="floating-heart">♥</div>
+<div class="background">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+</div>
 
-  <main class="page">
+<!-- Floating hearts -->
 
-    <!-- LEFT -->
+<div class="bg-heart">♥</div>
+<div class="bg-heart">♥</div>
+<div class="bg-heart">♥</div>
+<div class="bg-heart">♥</div>
+
+
+<!-- =======================================================
+     MAIN PAGE
+======================================================= -->
+
+<main class="page">
+
+    <!-- ===================================================
+         LEFT
+    ==================================================== -->
+
     <section class="content">
 
-      <div class="brand">
-        <div class="brand-logo">MJ</div>
+        <div class="brand">
 
-        <div>
-          <div class="brand-name">MJIS</div>
-          <span class="brand-subtitle">
-            MAA JANKI INDUSTRIAL SERVICES
-          </span>
+            <div class="brand-icon">
+                MJ
+            </div>
+
+            <div>
+                <div class="brand-name">
+                    MJIS
+                </div>
+
+                <div class="brand-small">
+                    MAA JANKI INDUSTRIAL SERVICES
+                </div>
+            </div>
+
         </div>
-      </div>
 
-      <div class="coming">
-        COMING SOON
-      </div>
 
-      <h1>
-        Something
-        <span>Beautiful.</span>
-      </h1>
+        <div class="badge">
+            <span class="badge-dot"></span>
+            SOMETHING BEAUTIFUL IS COMING
+        </div>
 
-      <p class="description">
-        Maa Janki Industrial Services is preparing something special.
-        Our new digital home is being crafted with care, precision,
-        and a little bit of love.
-      </p>
 
-      <div class="heart-line">
-        <div class="heart"></div>
-        <span>Building the future, one moment at a time.</span>
-      </div>
+        <h1>
+
+            <span class="line">
+                Coming
+            </span>
+
+            <span class="line pink">
+                Soon.
+            </span>
+
+        </h1>
+
+
+        <p class="description">
+            We are creating a new digital experience for
+            <strong>Maa Janki Industrial Services</strong>.
+            Simple, precise, modern — and made with a little
+            extra love.
+        </p>
+
+
+        <div class="love-line">
+
+            <div class="love-heart"></div>
+
+            <span>
+                Every great thing takes the right moment.
+            </span>
+
+        </div>
+
+
+        <!-- LIVE TIME -->
+
+        <div class="time-card">
+
+            <div class="live-dot"></div>
+
+            <div class="time-info">
+
+                <small>
+                    LIVE LOCAL TIME
+                </small>
+
+                <div id="miniTime">
+                    00:00:00
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
 
-    <!-- RIGHT / 3D CLOCK -->
-    <section class="clock-area">
 
-      <div class="clock-wrapper">
+    <!-- ===================================================
+         WATCH
+    ==================================================== -->
 
-        <div class="clock-shadow"></div>
+    <section class="watch-zone">
 
-        <div class="clock">
+        <div
+            class="watch-float"
+            id="watchFloat"
+        >
 
-          <!-- Clock ticks -->
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
-          <div class="tick"></div>
+            <div class="watch-shadow"></div>
 
-          <!-- Clock numbers -->
-          <div class="number n12">12</div>
-          <div class="number n3">3</div>
-          <div class="number n6">6</div>
-          <div class="number n9">9</div>
 
-          <!-- Hands -->
-          <div class="hand hour" id="hourHand"></div>
-          <div class="hand minute" id="minuteHand"></div>
-          <div class="hand second" id="secondHand"></div>
+            <div class="watch">
 
-          <div class="center-dot"></div>
+                <div class="crown"></div>
 
-          <!-- Digital live time -->
-          <div class="digital" id="digitalTime">
-            00:00:00
-          </div>
+
+                <!-- WATCH TICKS -->
+
+                <div class="tick t1"></div>
+                <div class="tick t2"></div>
+                <div class="tick t3"></div>
+                <div class="tick t4"></div>
+                <div class="tick t5"></div>
+                <div class="tick t6"></div>
+                <div class="tick t7"></div>
+                <div class="tick t8"></div>
+                <div class="tick t9"></div>
+                <div class="tick t10"></div>
+                <div class="tick t11"></div>
+                <div class="tick t12"></div>
+
+
+                <!-- NUMBERS -->
+
+                <div class="number n12">
+                    12
+                </div>
+
+                <div class="number n3">
+                    3
+                </div>
+
+                <div class="number n6">
+                    6
+                </div>
+
+                <div class="number n9">
+                    9
+                </div>
+
+
+                <!-- DATE -->
+
+                <div
+                    class="date-display"
+                    id="dateDisplay"
+                >
+                    TODAY
+                </div>
+
+
+                <!-- HANDS -->
+
+                <div
+                    class="hand hour"
+                    id="hourHand"
+                ></div>
+
+                <div
+                    class="hand minute"
+                    id="minuteHand"
+                ></div>
+
+                <div
+                    class="hand second"
+                    id="secondHand"
+                ></div>
+
+
+                <!-- CENTER -->
+
+                <div class="center"></div>
+
+
+                <!-- DIGITAL TIME -->
+
+                <div
+                    class="digital-time"
+                    id="digitalTime"
+                >
+                    00:00:00
+                </div>
+
+            </div>
 
         </div>
-      </div>
 
     </section>
 
-  </main>
+</main>
 
-  <div class="footer">
-    © <span id="year"></span> <strong>MJIS</strong> · Maa Janki Industrial Services
-  </div>
 
-  <script>
+<!-- FOOTER -->
+
+<div class="footer">
+    © <span id="year"></span>
+    <b>MJIS</b>
+    · Maa Janki Industrial Services
+</div>
+
+
+<script>
+
+/* =========================================================
+   MJIS LIVE CLOCK
+========================================================= */
+
+function updateClock() {
+
+    const now = new Date();
+
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
     /*
-      MJIS LIVE CLOCK
-      Uses the visitor's local system time.
+       Smooth analog clock angles
     */
 
-    function updateClock() {
-
-      const now = new Date();
-
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
-
-      // Analog clock angles
-      const hourAngle =
+    const hourAngle =
         ((hours % 12) * 30) +
-        (minutes * 0.5);
+        (minutes * 0.5) +
+        (seconds / 120);
 
-      const minuteAngle =
+    const minuteAngle =
         (minutes * 6) +
         (seconds * 0.1);
 
-      const secondAngle =
+    const secondAngle =
         seconds * 6;
 
-      document.getElementById("hourHand").style.transform =
+
+    document.getElementById("hourHand")
+        .style.transform =
         `rotate(${hourAngle}deg)`;
 
-      document.getElementById("minuteHand").style.transform =
+
+    document.getElementById("minuteHand")
+        .style.transform =
         `rotate(${minuteAngle}deg)`;
 
-      document.getElementById("secondHand").style.transform =
+
+    document.getElementById("secondHand")
+        .style.transform =
         `rotate(${secondAngle}deg)`;
 
-      // Digital time
-      const h = String(hours).padStart(2, "0");
-      const m = String(minutes).padStart(2, "0");
-      const s = String(seconds).padStart(2, "0");
 
-      document.getElementById("digitalTime").textContent =
-        `${h}:${m}:${s}`;
+    /*
+       Digital clock
+    */
+
+    const hh =
+        String(hours).padStart(2, "0");
+
+    const mm =
+        String(minutes).padStart(2, "0");
+
+    const ss =
+        String(seconds).padStart(2, "0");
+
+
+    const currentTime =
+        `${hh}:${mm}:${ss}`;
+
+
+    document.getElementById("digitalTime")
+        .textContent = currentTime;
+
+
+    document.getElementById("miniTime")
+        .textContent = currentTime;
+
+
+    /*
+       Date
+    */
+
+    const dateText =
+        now.toLocaleDateString(
+            undefined,
+            {
+                day: "2-digit",
+                month: "short"
+            }
+        ).toUpperCase();
+
+
+    document.getElementById("dateDisplay")
+        .textContent = dateText;
+}
+
+
+/*
+   Start clock immediately
+*/
+
+updateClock();
+
+
+/*
+   Keep it live
+*/
+
+setInterval(updateClock, 1000);
+
+
+/*
+   Current year
+*/
+
+document.getElementById("year")
+    .textContent =
+    new Date().getFullYear();
+
+
+/* =========================================================
+   DESKTOP — CURSOR HEART TRAIL
+========================================================= */
+
+let lastHeartTime = 0;
+
+document.addEventListener(
+    "pointermove",
+    function(event) {
+
+        /*
+           Only create hearts occasionally.
+           This keeps performance smooth.
+        */
+
+        const now = Date.now();
+
+        if (now - lastHeartTime < 90) {
+            return;
+        }
+
+        lastHeartTime = now;
+
+
+        const heart =
+            document.createElement("div");
+
+        heart.className =
+            "cursor-heart";
+
+
+        heart.style.left =
+            event.clientX + "px";
+
+        heart.style.top =
+            event.clientY + "px";
+
+
+        /*
+           Random sideways movement
+        */
+
+        const drift =
+            (Math.random() * 40 - 20) + "px";
+
+        heart.style.setProperty(
+            "--drift",
+            drift
+        );
+
+
+        document.body.appendChild(heart);
+
+
+        setTimeout(
+            () => heart.remove(),
+            1000
+        );
     }
+);
 
-    // Footer year
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
 
-    // Start clock
-    updateClock();
+/* =========================================================
+   MOBILE — TOUCH HEARTS
+========================================================= */
 
-    // Update every second
-    setInterval(updateClock, 1000);
-  </script>
+document.addEventListener(
+    "touchstart",
+    function(event) {
+
+        const touch =
+            event.touches[0];
+
+        if (!touch) return;
+
+
+        const heart =
+            document.createElement("div");
+
+        heart.className =
+            "touch-heart";
+
+        heart.textContent = "♥";
+
+
+        heart.style.left =
+            touch.clientX + "px";
+
+        heart.style.top =
+            touch.clientY + "px";
+
+
+        document.body.appendChild(heart);
+
+
+        setTimeout(
+            () => heart.remove(),
+            1100
+        );
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =========================================================
+   3D WATCH — MOUSE PARALLAX
+========================================================= */
+
+const watch =
+    document.getElementById("watchFloat");
+
+
+const isTouchDevice =
+    window.matchMedia(
+        "(pointer: coarse)"
+    ).matches;
+
+
+if (!isTouchDevice) {
+
+    document.addEventListener(
+        "mousemove",
+        function(event) {
+
+            const x =
+                (event.clientX /
+                window.innerWidth -
+                0.5);
+
+            const y =
+                (event.clientY /
+                window.innerHeight -
+                0.5);
+
+
+            /*
+               Subtle 3D movement
+            */
+
+            const rotateY =
+                x * 10;
+
+            const rotateX =
+                y * -10;
+
+
+            watch.style.transform =
+                `
+                translateY(0)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                `;
+        }
+    );
+
+
+    document.addEventListener(
+        "mouseleave",
+        function() {
+
+            watch.style.transform =
+                "";
+        }
+    );
+}
+
+
+/* =========================================================
+   WATCH DOUBLE CLICK / TAP LITTLE HEART
+========================================================= */
+
+watch.addEventListener(
+    "dblclick",
+    function(event) {
+
+        createBigHeart(
+            event.clientX,
+            event.clientY
+        );
+
+    }
+);
+
+
+function createBigHeart(x, y) {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className =
+        "touch-heart";
+
+    heart.textContent =
+        "♥";
+
+    heart.style.fontSize =
+        "42px";
+
+    heart.style.left =
+        x + "px";
+
+    heart.style.top =
+        y + "px";
+
+
+    document.body.appendChild(heart);
+
+
+    setTimeout(
+        () => heart.remove(),
+        1100
+    );
+}
+
+
+/* =========================================================
+   PREVENT ACCIDENTAL LONG PRESS MENU ON WATCH
+========================================================= */
+
+watch.addEventListener(
+    "contextmenu",
+    function(event) {
+        event.preventDefault();
+    }
+);
+
+</script>
 
 </body>
 </html>
